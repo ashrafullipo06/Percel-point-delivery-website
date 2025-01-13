@@ -3,8 +3,19 @@ import GoogleLogin from "../shared/GoogleLogin/GoogleLogin";
 import LoginRegisterLottie from "../shared/LoginRegisterLottie/LoginRegisterLottie";
 import logo from "/percel-point.svg";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <section className="min-h-screen flex items-center justify-center ">
       <Helmet>
@@ -25,10 +36,11 @@ const Login = () => {
           <h2 className="text-5xl font-bold mb-6 text-center text-gray-800 py-4">
             Login
           </h2>
-          <form className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             {/* Email Input */}
             <div>
               <input
+                {...register("email", { required: true })}
                 type="email"
                 placeholder="Email"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -39,6 +51,7 @@ const Login = () => {
             {/* Password Input */}
             <div>
               <input
+                {...register("password", { required: true })}
                 type="password"
                 placeholder="Password"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
