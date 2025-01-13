@@ -2,10 +2,14 @@ import { Link } from "react-router-dom";
 import GoogleLogin from "../shared/GoogleLogin/GoogleLogin";
 import LoginRegisterLottie from "../shared/LoginRegisterLottie/LoginRegisterLottie";
 import logo from "/percel-point.svg";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   return (
     <section className="min-h-screen flex items-center justify-center ">
+      <Helmet>
+        <title>Percel Point | Login</title>
+      </Helmet>
       <div className="flex flex-col md:flex-row items-center justify-center shadow-lg container mx-auto ">
         {/* Lottie Animation */}
         <div className="flex-1">

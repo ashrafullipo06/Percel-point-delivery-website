@@ -1,7 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../../public/percel-point.svg";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, handleLogout } = useAuth();
   const navLinks = (
     <>
       <li>
@@ -10,7 +12,17 @@ const Navbar = () => {
     </>
   );
 
-  const adminLinks = <></>;
+  const adminLinks = (
+    <>
+      <li>
+        <NavLink>Dashboard</NavLink>
+      </li>
+      <div className="divider"></div>
+      <li>
+        <button onClick={handleLogout}>Log Out</button>
+      </li>
+    </>
+  );
   return (
     <div>
       <div className="navbar bg-base-100">
@@ -48,9 +60,36 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end">
-          <Link to="/login" className="btn">
-            Login
-          </Link>
+          {user ? (
+            <>
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                >
+                  {adminLinks}
+                </ul>
+              </div>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="btn">
+                Login
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
