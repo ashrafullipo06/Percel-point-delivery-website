@@ -5,6 +5,8 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Home from "../pages/Home/Home/Home";
 import DashboardLayout from "../layouts/DashboardLayout";
+import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import Loading from "../pages/shared/Loading/Loading";
 
 const Router = createBrowserRouter([
   {
@@ -29,6 +31,16 @@ const Router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout />,
+    children: [
+      {
+        path: "users",
+        element: <AllUsers />,
+      },
+    ],
+  },
+  {
+    path: "loading",
+    element: <Loading />,
   },
 ]);
 
