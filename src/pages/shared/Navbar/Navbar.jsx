@@ -3,7 +3,7 @@ import logo from "../../../../public/percel-point.svg";
 import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
-  const { user, handleLogout } = useAuth();
+  const { user, handleLogout, loading } = useAuth();
   const navLinks = (
     <>
       <li>
@@ -15,7 +15,7 @@ const Navbar = () => {
   const adminLinks = (
     <>
       <li>
-        <NavLink>Dashboard</NavLink>
+        <NavLink to="/dashboard">Dashboard</NavLink>
       </li>
       <div className="divider"></div>
       <li>
@@ -60,34 +60,40 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end">
-          {user ? (
-            <>
-              <div className="dropdown dropdown-end">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
-                >
-                  <div className="w-10 rounded-full">
-                    <img
-                      alt="Tailwind CSS Navbar component"
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    />
-                  </div>
-                </div>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-                >
-                  {adminLinks}
-                </ul>
-              </div>
-            </>
+          {loading ? (
+            <span className="loading loading-ring loading-lg"></span>
           ) : (
             <>
-              <Link to="/login" className="btn">
-                Login
-              </Link>
+              {user ? (
+                <>
+                  <div className="dropdown dropdown-end">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      className="btn btn-ghost btn-circle avatar"
+                    >
+                      <div className="w-10 rounded-full">
+                        <img
+                          alt="Tailwind CSS Navbar component"
+                          src={user?.photoURL}
+                        />
+                      </div>
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                    >
+                      {adminLinks}
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="btn">
+                    Login
+                  </Link>
+                </>
+              )}
             </>
           )}
         </div>
