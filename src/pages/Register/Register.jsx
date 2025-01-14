@@ -22,7 +22,7 @@ const Register = () => {
     import.meta.env.VITE_IMG_BB_API
   }`;
   const onSubmit = async (data) => {
-    const { name, email, password } = data;
+    const { name, email, phone, requestedRole, password } = data;
     console.log(data);
     try {
       const imageFile = { image: data.image[0] };
@@ -32,7 +32,7 @@ const Register = () => {
       const imgDisplayUrl = res.data.data.display_url;
       await createUserByEmailPassword(email, password);
       await updateUserInfo(name, imgDisplayUrl);
-      const userDetails = { name, email, imgDisplayUrl };
+      const userDetails = { name, email, imgDisplayUrl, phone, requestedRole };
       const userData = await axiosPublic.post("/users", userDetails);
       console.log(userData.data);
       if (userData.data.insertedId) {
@@ -91,6 +91,20 @@ const Register = () => {
                 </p>
               )}
             </div>
+            {/* Phone */}
+            <div>
+              <input
+                type="tel"
+                {...register("phone", { required: "Phone number is required" })}
+                placeholder="Phone Number"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              />
+              {errors.phone && (
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.phone.message}
+                </p>
+              )}
+            </div>
             {/* Photo */}
             <div>
               <input
@@ -98,6 +112,27 @@ const Register = () => {
                 {...register("image")}
                 className="file-input file-input-bordered w-full "
               />
+            </div>
+            {/* Phone */}
+            <div>
+              <select
+                defaultValue="Select user type"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                {...register("requestedRole", {
+                  required: "User type is required",
+                })}
+              >
+                <option disabled>Select user type</option>
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+                <option value="Delivery Man">Delivery Man</option>
+              </select>
+
+              {errors.phone && (
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.phone.message}
+                </p>
+              )}
             </div>
             {/* Password */}
             <div>
