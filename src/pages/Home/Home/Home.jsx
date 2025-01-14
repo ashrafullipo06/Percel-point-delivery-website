@@ -1,3 +1,4 @@
+import FAQ from "../FAQ/FAQ";
 import Features from "../Features/Features";
 import HeroBanner from "../HeroBanner/HeroBanner";
 import Statistics from "../Statistics/Statistics";
@@ -11,6 +12,7 @@ const Home = () => {
         <Features />
         <Statistics />
         <TopRatedDeliveryMan />
+        <FAQ/>
       </div>
     </div>
   );
