@@ -3,6 +3,7 @@ import userimg from "../../../assets/dashboard/users.png";
 import deleveryMen from "../../../assets/dashboard/delivery.png";
 import percel from "../../../assets/dashboard/booked.png";
 import bookedPercel from "../../../assets/dashboard/checklist.png";
+import home from "../../../assets/dashboard/home.png";
 
 const Dashboard = () => {
   const admin = !true;
@@ -140,7 +141,7 @@ const Dashboard = () => {
             to="/"
             className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
           >
-            <img className="w-8 h-8" src={deleveryMen} alt="Home Icon" />
+            <img className="w-8 h-8" src={home} alt="Home Icon" />
             <span className="font-semibold text-gray-700">Home</span>
           </NavLink>
         </li>
