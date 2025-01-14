@@ -6,7 +6,7 @@ import img3 from "../../../assets/features/3.svg";
 
 const Features = () => {
   return (
-    <section className="py-12 xl:py-24">
+    <section>
       <Heading title="Features" />
       <div className="grid grid-cols-3 py-4 gap-8 ">
         <FeatureCard
