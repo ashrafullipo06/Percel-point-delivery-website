@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const provider = new GoogleAuthProvider();
@@ -19,6 +20,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const auth = getAuth(app);
+  const axiosPublic = useAxiosPublic();
 
   // Create user with email and password
   const createUserByEmailPassword = async (email, pass) => {
@@ -97,11 +99,24 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      console.log(currentUser.email);
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res) {
+            const token = res.data.token;
+            localStorage.setItem("token", token);
+          } else {
+            localStorage.removeItem("token");
+            setUser(null);
+          }
+        });
+      }
     });
     return () => {
       unsubscribe();
     };
-  }, [auth]);
+  }, [auth, axiosPublic]);
 
   console.log(loading);
   console.log(user);
