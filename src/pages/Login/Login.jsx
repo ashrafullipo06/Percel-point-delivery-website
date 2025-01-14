@@ -4,8 +4,11 @@ import LoginRegisterLottie from "../shared/LoginRegisterLottie/LoginRegisterLott
 import logo from "/percel-point.svg";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const { signInByExistingAccount } = useAuth();
   const {
     register,
     handleSubmit,
@@ -14,7 +17,11 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    const { email, password } = data;
     console.log(data);
+    signInByExistingAccount(email, password).then(() => {
+      toast.success("Sucessfully Login");
+    });
   };
   return (
     <section className="min-h-screen flex items-center justify-center ">

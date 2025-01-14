@@ -6,8 +6,8 @@ import bookedPercel from "../../../assets/dashboard/checklist.png";
 import home from "../../../assets/dashboard/home.png";
 
 const Dashboard = () => {
-  const admin = !true;
-  const user = !false;
+  const admin = true;
+  const user = false;
   const deliveryMen = false;
   return (
     <div className="h-screen bg-base-200 flex flex-col">
