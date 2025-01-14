@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "/percel-point.svg";
 import LoginRegisterLottie from "../shared/LoginRegisterLottie/LoginRegisterLottie";
@@ -6,40 +7,59 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+
 const Register = () => {
-  const { createUserByEmailPassword } = useAuth();
+  const { createUserByEmailPassword, updateUserInfo } = useAuth();
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
-
     formState: { errors },
   } = useForm();
 
+  const imgbb = `https://api.imgbb.com/1/upload?key=${
+    import.meta.env.VITE_IMG_BB_API
+  }`;
   const onSubmit = async (data) => {
+    const { name, email, password } = data;
     console.log(data);
-    const { email, password } = data;
-    await createUserByEmailPassword(email, password);
-    toast.success("Successfully Create account");
+    try {
+      const imageFile = { image: data.image[0] };
+      const res = await axiosPublic.post(imgbb, imageFile, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      const imgDisplayUrl = res.data.data.display_url;
+      await createUserByEmailPassword(email, password);
+      await updateUserInfo(name, imgDisplayUrl);
+      const userDetails = { name, email, imgDisplayUrl };
+      const userData = await axiosPublic.post("/users", userDetails);
+      console.log(userData.data);
+      if (userData.data.insertedId) {
+        toast.success("Account create successfully.");
+      }
+    } catch (error) {
+      // console.log(error);
+      toast.error("Something went wrong..");
+      throw error;
+    }
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center ">
+    <section className="min-h-screen flex items-center justify-center bg-gray-50">
       <Helmet>
         <title>Percel Point | Register</title>
       </Helmet>
-      <div className="flex flex-col md:flex-row items-center justify-center shadow-lg container mx-auto ">
-        {/* Lottie Animation */}
+      <div className="flex flex-col md:flex-row items-center justify-center shadow-lg container mx-auto bg-white rounded-lg overflow-hidden">
         <div className="flex-1">
           <LoginRegisterLottie />
         </div>
-
-        {/* Login Form */}
         <div className="flex-1 w-full max-w-3xl px-12">
-          <div className="space-y-4">
-            <img className="w-16 mx-auto" src={logo} alt="" />
-            <p className="text-center">Welcom to Percel Point</p>
+          <div className="text-center mb-6">
+            <img className="w-16 mx-auto" src={logo} alt="Percel Point Logo" />
+            <p className="text-gray-600 mt-2">Welcome to Percel Point</p>
           </div>
-          <h2 className="text-5xl font-bold mb-6 text-center text-gray-800 py-4">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
             Register
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -47,45 +67,69 @@ const Register = () => {
             <div>
               <input
                 type="text"
-                {...register("name", { required: true })}
+                {...register("name", { required: "Name is required" })}
                 placeholder="Name"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                required
               />
+              {errors.name && (
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
-            {/* Email Input */}
+            {/* Email */}
             <div>
               <input
-                {...register("email", { required: true })}
                 type="email"
+                {...register("email", { required: "Email is required" })}
                 placeholder="Email"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                required
               />
+              {errors.email && (
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
-
-            {/* Password Input */}
+            {/* Photo */}
             <div>
               <input
-                {...register("password", { required: true })}
-                type="password"
-                placeholder="Password"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                required
+                type="file"
+                {...register("image")}
+                className="file-input file-input-bordered w-full "
               />
             </div>
+            {/* Password */}
+            <div>
+              <input
+                type="password"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
+                placeholder="Password"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              />
+              {errors.password && (
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full bg-blue-500 text-white font-semibold py-3 rounded-lg hover:bg-blue-600 transition-all"
             >
-              Login
+              Register
             </button>
           </form>
+
           <GoogleLogin />
 
-          {/* Register Link */}
           <p className="text-center mt-4 text-gray-600">
             Already have an account?
             <Link to="/login" className="text-blue-500 hover:underline ml-1">

@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { toast } from "react-toastify";
 
@@ -38,7 +39,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const result = await signInWithPopup(auth, provider);
-        toast.success("Successfully login");
+      toast.success("Successfully login");
       setUser(result.user);
       return result;
     } catch (error) {
@@ -46,6 +47,19 @@ const AuthProvider = ({ children }) => {
       throw error;
     } finally {
       setLoading(false);
+    }
+  };
+
+  const updateUserInfo = async (name, photo) => {
+    try {
+      const update = await updateProfile(auth.currentUser, {
+        displayName: name,
+        photoURL: photo,
+      });
+      return update;
+    } catch (error) {
+      console.log("Error from info update", error);
+      throw error;
     }
   };
 
@@ -99,6 +113,7 @@ const AuthProvider = ({ children }) => {
     handleGoogleLogin,
     signInByExistingAccount,
     handleLogout,
+    updateUserInfo,
   };
 
   return (
