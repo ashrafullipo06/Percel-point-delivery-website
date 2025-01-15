@@ -1,10 +1,19 @@
+import { useState } from "react";
 import Heading from "../../components/Heading";
 import useAllPercels from "../../hooks/useAllPercels";
 import { format } from "date-fns";
 import { IoIosSettings } from "react-icons/io";
+import Modal from "../../components/Modal";
+import Loading from "../shared/Loading/Loading";
 const AllPercels = () => {
   const { allPercels, refetch, isLoading } = useAllPercels();
-
+  const [selectPercel, setSelecetPercel] = useState(null);
+  const handleManage = (percel) => {
+    // console.log(percel);
+    document.getElementById("my_modal_5").showModal();
+    setSelecetPercel(percel);
+  };
+  if (isLoading) return <Loading />;
   return (
     <div>
       <Heading title="All Percels" />
@@ -49,23 +58,12 @@ const AllPercels = () => {
                     )}
                   </td>
                   <td>{percel.cost} tk</td>
-                  <th>
-                    <select
-                      defaultValue=""
-                      className=" select-bordered w-full max-w-xs"
-                    >
-                      <option value="" disabled>
-                        {percel.status}
-                      </option>
-                      <option value="on the way">on the way</option>
-                      <option value="delivered">delivered</option>
-                      <option value="returend">returend</option>
-                      <option value="returend">returend</option>
-                      <option value="canceled">canceled</option>
-                    </select>
-                  </th>
+                  <th>{percel.status}</th>
                   <td>
-                    <button className="btn text-xl bg-orange-500 text-white">
+                    <button
+                      onClick={() => handleManage(percel)}
+                      className="btn text-xl bg-orange-500 text-white"
+                    >
                       <IoIosSettings />
                     </button>
                   </td>
@@ -75,6 +73,7 @@ const AllPercels = () => {
           </table>
         </div>
       </div>
+      <Modal selectPercel={selectPercel} />
     </div>
   );
 };
