@@ -117,7 +117,7 @@ const AuthProvider = ({ children }) => {
     };
   }, [auth, axiosPublic]);
 
-  console.log(user);
+  // console.log(user);
 
   const authInfo = {
     user,

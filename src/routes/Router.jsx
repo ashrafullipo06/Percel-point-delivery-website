@@ -8,6 +8,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Loading from "../pages/shared/Loading/Loading";
 import PercelBook from "../pages/Dashboard/PercelBook/PercelBook";
+import MyPercel from "../pages/Dashboard/MyPercel/MyPercel";
 
 const Router = createBrowserRouter([
   {
@@ -37,9 +38,14 @@ const Router = createBrowserRouter([
         path: "users",
         element: <AllUsers />,
       },
+      //!  User
       {
         path: "book-percel",
         element: <PercelBook />,
+      },
+      {
+        path: "my-percel",
+        element: <MyPercel />,
       },
     ],
   },

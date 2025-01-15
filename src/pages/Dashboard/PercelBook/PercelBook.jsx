@@ -38,8 +38,8 @@ const PercelBook = () => {
     axiosPublic.post("/percels", data).then((res) => {
       if (res.data.insertedId) {
         Swal.fire({
-          title: "Good job!",
-          text: `${isUser.name} added your ${data.percelType} in the queue`,
+          title: "Successfully!",
+          text: `${isUser.name} booked your ${data.percelType} percel`,
           icon: "success",
         });
       }
