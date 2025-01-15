@@ -3,19 +3,35 @@ import useAllUsers from "../../../hooks/useAllUsers";
 import adminIcon from "../../../assets/dashboard/adminIcon.png";
 import userIcon from "../../../assets/dashboard/user.png";
 import deliveryMan from "../../../assets/dashboard/delivery.png";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
-  const { users, isLoading } = useAllUsers();
-  console.log(users);
+  const { users, isLoading, refetch } = useAllUsers();
+  const axiosSecure = useAxiosSecure();
 
-  const handleAdmin = (user) => {
-    console.log(user);
-  };
-  const handleUser = (user) => {
-    console.log(user);
-  };
-  const handleDeliveryMan = (user) => {
-    console.log(user);
+  const handleUserRole = (user, newRole) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Change ${user.role} to ${newRole}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: `Make ${newRole}`,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.patch(`/users/${user._id}`, {
+          role: newRole,
+        });
+        if (res) {
+          Swal.fire("Updated!", "User role has been updated.", "success");
+          refetch(); // Refresh the user list
+        } else {
+          Swal.fire("Error!", "Failed to update user role.", "error");
+        }
+      }
+    });
   };
 
   return (
@@ -51,8 +67,9 @@ const AllUsers = () => {
                 <td>{user.email}</td>
                 <td>
                   {user?.status === "pending" && (
-                    <p className="bg-red-300 px-2 py-1 rounded-full ">
-                      {user?.requestedRole}
+                    <p className="bg-green-500 px-2 py-1 text-center text-white rounded-full ">
+                      {user?.requestedRole === "deliveryMan" && "Delivery Man"}
+                      {user?.requestedRole === "admin" && "Admin"}
                     </p>
                   )}
                 </td>
@@ -60,31 +77,49 @@ const AllUsers = () => {
                 <th>
                   {user?.role === "admin" && (
                     <>
-                      <button className="btn btn-ghost btn-xs">
+                      <button
+                        onClick={() => handleUserRole(user, "user")}
+                        className="btn btn-ghost btn-xs"
+                      >
                         <img className="w-6" src={userIcon} />
                       </button>
-                      <button className="btn btn-ghost btn-xs">
+                      <button
+                        onClick={() => handleUserRole(user, "deliveryMan")}
+                        className="btn btn-ghost btn-xs"
+                      >
                         <img className="w-6" src={deliveryMan} />
                       </button>
                     </>
                   )}
                   {user?.role === "user" && (
                     <>
-                      <button className="btn btn-ghost btn-xs ">
+                      <button
+                        onClick={() => handleUserRole(user, "admin")}
+                        className="btn btn-ghost btn-xs "
+                      >
                         <img className="w-6" src={adminIcon} />
                       </button>
-                      <button className="btn btn-ghost btn-xs">
+                      <button
+                        onClick={() => handleUserRole(user, "deliveryMan")}
+                        className="btn btn-ghost btn-xs"
+                      >
                         <img className="w-6" src={deliveryMan} />
                       </button>
                     </>
                   )}
 
-                  {user?.role === "delivery man" && (
+                  {user?.role === "deliveryMan" && (
                     <>
-                      <button className="btn btn-ghost btn-xs ">
+                      <button
+                        onClick={() => handleUserRole(user, "admin")}
+                        className="btn btn-ghost btn-xs "
+                      >
                         <img className="w-6" src={adminIcon} />
                       </button>
-                      <button className="btn btn-ghost btn-xs">
+                      <button
+                        onClick={() => handleUserRole(user, "user")}
+                        className="btn btn-ghost btn-xs"
+                      >
                         <img className="w-6" src={userIcon} />
                       </button>
                     </>

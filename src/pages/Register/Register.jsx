@@ -123,9 +123,9 @@ const Register = () => {
                 })}
               >
                 <option disabled>Select user type</option>
-                <option value="User">User</option>
-                <option value="Admin">Admin</option>
-                <option value="Delivery Man">Delivery Man</option>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="deliveryMan">Delivery Man</option>
               </select>
 
               {errors.phone && (
