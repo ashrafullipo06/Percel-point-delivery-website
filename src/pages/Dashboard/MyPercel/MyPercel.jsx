@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useUser from "../../../hooks/useUser";
 import Heading from "../../../components/Heading";
 import { MdDelete } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
@@ -42,6 +43,10 @@ const MyPercel = () => {
         }
       }
     });
+  };
+
+  const handleUpdate = (percel) => {
+    console.log(percel);
   };
 
   return (
@@ -92,12 +97,18 @@ const MyPercel = () => {
                         {percel.status}
                       </span>
                     </td>
-                    <td>
+                    <td className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleUpdate(percel)}
+                        className="btn text-xl"
+                      >
+                        <CiEdit />
+                      </button>
                       <button
                         onClick={() => {
                           handleDelete(percel);
                         }}
-                        className="text-xl text-red-500 btn"
+                        className="text-xl text-red-500 btn bg-orange-200"
                       >
                         <MdDelete />
                       </button>

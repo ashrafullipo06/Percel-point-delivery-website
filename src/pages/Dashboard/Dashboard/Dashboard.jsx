@@ -10,7 +10,7 @@ const Dashboard = () => {
   const { isAdmin, isAdminLoading } = useAdmin();
   // console.log(isAdmin);
 
-  const user = !false;
+  const user = false;
   const deliveryMen = false;
   return (
     <div className="h-screen bg-base-200 flex flex-col">
@@ -23,11 +23,11 @@ const Dashboard = () => {
         {/* User */}
 
         {/* Admin Section */}
-        {!isAdmin && (
+        {isAdmin && (
           <>
             <li>
               <NavLink
-                to="users"
+                to="all-percels"
                 className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
               >
                 <img className="w-8 h-8" src={percel} alt="Users Icon" />
