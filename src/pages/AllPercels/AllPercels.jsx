@@ -1,6 +1,7 @@
 import Heading from "../../components/Heading";
 import useAllPercels from "../../hooks/useAllPercels";
-
+import { format } from "date-fns";
+import { IoIosSettings } from "react-icons/io";
 const AllPercels = () => {
   const { allPercels, refetch, isLoading } = useAllPercels();
 
@@ -26,38 +27,48 @@ const AllPercels = () => {
             <tbody>
               {allPercels.map((percel, i) => (
                 <tr key={percel._id}>
-                  <th>
-                    <label>
-                      <input type="checkbox" className="checkbox" />
-                    </label>
-                  </th>
+                  <th>{i + 1}</th>
                   <td>
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
-                          <img
-                            src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                            alt="Avatar Tailwind CSS Component"
-                          />
+                          <img src={percel.userImg} alt={percel.userName} />
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">Hart Hagerty</div>
-                        <div className="text-sm opacity-50">United States</div>
+                        <div className="font-bold">{percel.userName}</div>
                       </div>
                     </div>
                   </td>
+                  <td>{percel.userPhone}</td>
+                  <td>{format(new Date(percel.bookingDate), "dd MMM, yy")}</td>
                   <td>
-                    Zemlak, Daniel and Leannon
-                    <br />
-                    <span className="badge badge-ghost badge-sm">
-                      Desktop Support Technician
-                    </span>
+                    {format(
+                      new Date(percel.requestedDeliveryDate),
+                      "dd MMM, yy"
+                    )}
                   </td>
-                  <td>Purple</td>
+                  <td>{percel.cost} tk</td>
                   <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
+                    <select
+                      defaultValue=""
+                      className=" select-bordered w-full max-w-xs"
+                    >
+                      <option value="" disabled>
+                        {percel.status}
+                      </option>
+                      <option value="on the way">on the way</option>
+                      <option value="delivered">delivered</option>
+                      <option value="returend">returend</option>
+                      <option value="returend">returend</option>
+                      <option value="canceled">canceled</option>
+                    </select>
                   </th>
+                  <td>
+                    <button className="btn text-xl bg-orange-500 text-white">
+                      <IoIosSettings />
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
