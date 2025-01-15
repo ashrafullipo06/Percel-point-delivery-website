@@ -108,15 +108,14 @@ const AuthProvider = ({ children }) => {
             localStorage.removeItem("token");
             setUser(null);
           }
-          setLoading(false);
         });
       }
+      setLoading(false);
     });
     return () => {
       unsubscribe();
     };
   }, [auth, axiosPublic]);
-
 
   console.log(user);
 

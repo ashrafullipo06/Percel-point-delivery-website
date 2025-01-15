@@ -4,9 +4,12 @@ import deleveryMen from "../../../assets/dashboard/delivery.png";
 import percel from "../../../assets/dashboard/booked.png";
 import bookedPercel from "../../../assets/dashboard/checklist.png";
 import home from "../../../assets/dashboard/home.png";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Dashboard = () => {
-  const admin = true;
+  const { isAdmin, isAdminLoading } = useAdmin();
+  // console.log(isAdmin);
+
   const user = false;
   const deliveryMen = false;
   return (
@@ -20,7 +23,7 @@ const Dashboard = () => {
         {/* User */}
 
         {/* Admin Section */}
-        {admin && (
+        {isAdmin && (
           <>
             <li>
               <NavLink
