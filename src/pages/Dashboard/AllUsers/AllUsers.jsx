@@ -1,8 +1,22 @@
 import Heading from "../../../components/Heading";
 import useAllUsers from "../../../hooks/useAllUsers";
+import adminIcon from "../../../assets/dashboard/adminIcon.png";
+import userIcon from "../../../assets/dashboard/user.png";
+import deliveryMan from "../../../assets/dashboard/delivery.png";
 
 const AllUsers = () => {
   const { users, isLoading } = useAllUsers();
+  console.log(users);
+
+  const handleAdmin = (user) => {
+    console.log(user);
+  };
+  const handleUser = (user) => {
+    console.log(user);
+  };
+  const handleDeliveryMan = (user) => {
+    console.log(user);
+  };
 
   return (
     <div>
@@ -15,7 +29,8 @@ const AllUsers = () => {
               <th>SI</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Favorite Color</th>
+              <th>Request to be</th>
+              <th>Role</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -34,9 +49,46 @@ const AllUsers = () => {
                   </div>
                 </td>
                 <td>{user.email}</td>
-                <td>Purple</td>
+                <td>
+                  {user?.status === "pending" && (
+                    <p className="bg-red-300 px-2 py-1 rounded-full ">
+                      {user?.requestedRole}
+                    </p>
+                  )}
+                </td>
+                <td>{user.role}</td>
                 <th>
-                  <button className="btn btn-ghost btn-xs"> Delete</button>
+                  {user?.role === "admin" && (
+                    <>
+                      <button className="btn btn-ghost btn-xs">
+                        <img className="w-6" src={userIcon} />
+                      </button>
+                      <button className="btn btn-ghost btn-xs">
+                        <img className="w-6" src={deliveryMan} />
+                      </button>
+                    </>
+                  )}
+                  {user?.role === "user" && (
+                    <>
+                      <button className="btn btn-ghost btn-xs ">
+                        <img className="w-6" src={adminIcon} />
+                      </button>
+                      <button className="btn btn-ghost btn-xs">
+                        <img className="w-6" src={deliveryMan} />
+                      </button>
+                    </>
+                  )}
+
+                  {user?.role === "delivery man" && (
+                    <>
+                      <button className="btn btn-ghost btn-xs ">
+                        <img className="w-6" src={adminIcon} />
+                      </button>
+                      <button className="btn btn-ghost btn-xs">
+                        <img className="w-6" src={userIcon} />
+                      </button>
+                    </>
+                  )}
                 </th>
               </tr>
             ))}
