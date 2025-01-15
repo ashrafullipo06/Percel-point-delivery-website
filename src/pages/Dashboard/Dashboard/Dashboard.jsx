@@ -10,7 +10,7 @@ const Dashboard = () => {
   const { isAdmin, isAdminLoading } = useAdmin();
   // console.log(isAdmin);
 
-  const user = false;
+  const user = !false;
   const deliveryMen = false;
   return (
     <div className="h-screen bg-base-200 flex flex-col">
@@ -23,7 +23,7 @@ const Dashboard = () => {
         {/* User */}
 
         {/* Admin Section */}
-        {isAdmin && (
+        {!isAdmin && (
           <>
             <li>
               <NavLink

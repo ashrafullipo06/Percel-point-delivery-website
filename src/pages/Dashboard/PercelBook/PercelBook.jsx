@@ -29,6 +29,7 @@ const PercelBook = () => {
     console.log(data);
   };
 
+
   return (
     <section className=" px-6 py-10">
       <div className="  rounded-lg p-8 w-full max-w-3xl">
@@ -66,8 +67,8 @@ const PercelBook = () => {
           <div className="col-span-2 md:col-span-1">
             <label className="block text-gray-700 mb-1">Phone Number</label>
             <input
-              type="text"
-              placeholder="Phone Number"
+              type="tel"
+              defaultValue={user?.phone}
               className="w-full border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
