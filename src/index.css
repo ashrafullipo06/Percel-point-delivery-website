@@ -10,3 +10,7 @@ html {
 body {
   font-family: "Poppins", serif;
 }
+
+.react-datepicker-wrapper {
+  width: 100%;
+}

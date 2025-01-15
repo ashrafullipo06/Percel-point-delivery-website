@@ -4,10 +4,12 @@ import Heading from "../../../components/Heading";
 import { useForm } from "react-hook-form";
 import useUser from "../../../hooks/useUser";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 const PercelBook = () => {
   const [charge, setCharge] = useState(0);
   const { isUser, isUserLoading } = useUser();
+  const [startDate, setStartDate] = useState(new Date());
   const axiosPublic = useAxiosPublic();
 
   const userId = isUser?._id;
@@ -34,6 +36,7 @@ const PercelBook = () => {
   const onSubmit = (data) => {
     data.userId = userId;
     data.charge = charge;
+    data.requestedDeliveryDate = startDate;
     console.log(data);
     axiosPublic.post("/percels", data).then((res) => {
       if (res.data.insertedId) {
@@ -48,7 +51,7 @@ const PercelBook = () => {
 
   return (
     <section className=" px-6 py-10">
-      <div className="  rounded-lg p-8 w-full max-w-3xl">
+      <div className="  rounded-lg p-8 w-full max-w-3xl mx-auto">
         <Heading title="Book A Parcel" />
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -125,7 +128,7 @@ const PercelBook = () => {
             />
           </div>
           {/* Delivery Address */}
-          <div className="col-span-2">
+          <div className="col-span-2 md:col-span-1">
             <label className="block text-gray-700 mb-1">Delivery Address</label>
             <input
               type="text"
@@ -133,6 +136,17 @@ const PercelBook = () => {
               placeholder="Delivery Address"
               className="w-full border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
               required
+            />
+          </div>
+          {/* Date Piker */}
+          <div className="col-span-2 md:col-span-1">
+            <label className="block text-gray-700 mb-1">
+              Requested Delivery Date
+            </label>
+            <DatePicker
+              className="w-full border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
             />
           </div>
           {/* Latitude */}
