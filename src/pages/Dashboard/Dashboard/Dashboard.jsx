@@ -9,9 +9,9 @@ import useAdmin from "../../../hooks/useAdmin";
 const Dashboard = () => {
   const { isAdmin, isAdminLoading } = useAdmin();
   // console.log(isAdmin);
-
   const user = false;
   const deliveryMen = false;
+
   return (
     <div className="h-screen bg-base-200 flex flex-col">
       <h1 className="text-3xl font-bold text-center pt-8 text-gray-800">
@@ -45,7 +45,7 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink
-                to="delivery-men"
+                to="all-delivery-men"
                 className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
               >
                 <img

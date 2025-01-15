@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../../public/percel-point.svg";
 import useAuth from "../../../hooks/useAuth";
-
+import { MdNotificationsActive } from "react-icons/md";
 const Navbar = () => {
   const { user, handleLogout, loading } = useAuth();
   // console.log(loading);
@@ -9,6 +9,14 @@ const Navbar = () => {
     <>
       <li>
         <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <button className="btn btn-ghost btn-circle">
+          <div className="indicator">
+            <MdNotificationsActive />
+            <span className="badge badge-xs badge-primary indicator-item"></span>
+          </div>
+        </button>
       </li>
     </>
   );

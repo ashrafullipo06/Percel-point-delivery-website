@@ -10,6 +10,7 @@ import Loading from "../pages/shared/Loading/Loading";
 import PercelBook from "../pages/Dashboard/PercelBook/PercelBook";
 import MyPercel from "../pages/Dashboard/MyPercel/MyPercel";
 import AllPercels from "../pages/AllPercels/AllPercels";
+import AllDeliveryMen from "../pages/Dashboard/AllDeliveryMen/AllDeliveryMen";
 
 const Router = createBrowserRouter([
   {
@@ -35,10 +36,6 @@ const Router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout />,
     children: [
-      {
-        path: "users",
-        element: <AllUsers />,
-      },
       //!  User
       {
         path: "book-percel",
@@ -50,8 +47,16 @@ const Router = createBrowserRouter([
       },
       // ! Admin
       {
+        path: "users",
+        element: <AllUsers />,
+      },
+      {
         path: "all-percels",
         element: <AllPercels />,
+      },
+      {
+        path: "all-delivery-men",
+        element: <AllDeliveryMen />,
       },
     ],
   },
