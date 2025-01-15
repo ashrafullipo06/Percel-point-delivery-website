@@ -26,7 +26,7 @@ const AllUsers = () => {
         });
         if (res) {
           Swal.fire("Updated!", "User role has been updated.", "success");
-          refetch(); // Refresh the user list
+          refetch();
         } else {
           Swal.fire("Error!", "Failed to update user role.", "error");
         }
@@ -34,60 +34,90 @@ const AllUsers = () => {
     });
   };
 
+  if (isLoading) {
+    return <div className="text-center mt-10">Loading...</div>;
+  }
+
   return (
-    <div>
+    <div className="container mx-auto p-6">
       <Heading title="All Users" />
-      <div className="overflow-x-auto w-full py-24">
-        <table className="table">
-          {/* head */}
-          <thead>
+      <div className="overflow-x-auto mt-6">
+        <table className="table-auto w-full border border-gray-200 rounded-lg shadow-md">
+          {/* Head */}
+          <thead className="bg-green-600 text-white">
             <tr>
-              <th>SI</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Request to be</th>
-              <th>Role</th>
-              <th>Actions</th>
+              <th className="px-6 py-3 text-center text-sm font-semibold uppercase">
+                SI
+              </th>
+              <th className="px-6 py-3 text-center text-sm font-semibold uppercase">
+                Name
+              </th>
+              <th className="px-6 py-3 text-center text-sm font-semibold uppercase">
+                Email
+              </th>
+              <th className="px-6 py-3 text-center text-sm font-semibold uppercase">
+                Request to Be
+              </th>
+              <th className="px-6 py-3 text-center text-sm font-semibold uppercase">
+                Role
+              </th>
+              <th className="px-6 py-3 text-center text-sm font-semibold uppercase">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
             {users?.map((user, i) => (
-              <tr key={user._id}>
-                <th>{i + 1}</th>
-                <td>
-                  <div className="flex items-center gap-3">
+              <tr
+                key={user._id}
+                className={`${
+                  i % 2 === 0 ? "bg-gray-50" : "bg-white"
+                } hover:bg-gray-100`}
+              >
+                <td className="px-6 py-4 text-center">{i + 1}</td>
+                <td className="px-6 py-4">
+                  <div className="flex items-center justify-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                        <img src={user.imgDisplayUrl} alt={user.name} />
+                        <img
+                          src={user.imgDisplayUrl}
+                          alt={user.name}
+                          className="object-cover"
+                        />
                       </div>
                     </div>
-                    <div className="font-semibold">{user.name}</div>
+                    <div className="font-bold">{user.name}</div>
                   </div>
                 </td>
-                <td>{user.email}</td>
-                <td>
+                <td className="px-6 py-4 text-center">{user.email}</td>
+                <td className="px-6 py-4 text-center">
                   {user?.status === "pending" && (
-                    <p className="bg-green-500 px-2 py-1 text-center text-white rounded-full ">
-                      {user?.requestedRole === "deliveryMan" && "Delivery Man"}
-                      {user?.requestedRole === "admin" && "Admin"}
-                    </p>
+                    <span className="bg-green-500 px-2 py-1 text-white rounded-full">
+                      {user?.requestedRole === "deliveryMan"
+                        ? "Delivery Man"
+                        : "Admin"}
+                    </span>
                   )}
                 </td>
-                <td>{user.role}</td>
-                <th>
+                <td className="px-6 py-4 text-center">{user.role}</td>
+                <td className="px-6 py-4 text-center">
                   {user?.role === "admin" && (
                     <>
                       <button
                         onClick={() => handleUserRole(user, "user")}
                         className="btn btn-ghost btn-xs"
                       >
-                        <img className="w-6" src={userIcon} />
+                        <img className="w-6" src={userIcon} alt="User Icon" />
                       </button>
                       <button
                         onClick={() => handleUserRole(user, "deliveryMan")}
                         className="btn btn-ghost btn-xs"
                       >
-                        <img className="w-6" src={deliveryMan} />
+                        <img
+                          className="w-6"
+                          src={deliveryMan}
+                          alt="Delivery Icon"
+                        />
                       </button>
                     </>
                   )}
@@ -95,36 +125,39 @@ const AllUsers = () => {
                     <>
                       <button
                         onClick={() => handleUserRole(user, "admin")}
-                        className="btn btn-ghost btn-xs "
+                        className="btn btn-ghost btn-xs"
                       >
-                        <img className="w-6" src={adminIcon} />
+                        <img className="w-6" src={adminIcon} alt="Admin Icon" />
                       </button>
                       <button
                         onClick={() => handleUserRole(user, "deliveryMan")}
                         className="btn btn-ghost btn-xs"
                       >
-                        <img className="w-6" src={deliveryMan} />
+                        <img
+                          className="w-6"
+                          src={deliveryMan}
+                          alt="Delivery Icon"
+                        />
                       </button>
                     </>
                   )}
-
                   {user?.role === "deliveryMan" && (
                     <>
                       <button
                         onClick={() => handleUserRole(user, "admin")}
-                        className="btn btn-ghost btn-xs "
+                        className="btn btn-ghost btn-xs"
                       >
-                        <img className="w-6" src={adminIcon} />
+                        <img className="w-6" src={adminIcon} alt="Admin Icon" />
                       </button>
                       <button
                         onClick={() => handleUserRole(user, "user")}
                         className="btn btn-ghost btn-xs"
                       >
-                        <img className="w-6" src={userIcon} />
+                        <img className="w-6" src={userIcon} alt="User Icon" />
                       </button>
                     </>
                   )}
-                </th>
+                </td>
               </tr>
             ))}
           </tbody>
