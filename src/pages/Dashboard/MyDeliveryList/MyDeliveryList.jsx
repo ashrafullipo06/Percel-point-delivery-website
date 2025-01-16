@@ -1,15 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Heading from "../../../components/Heading";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUser from "../../../hooks/useUser";
 import Loading from "../../shared/Loading/Loading";
+import Swal from "sweetalert2";
 
 const MyDeliveryList = () => {
   const { isUser, isUserLoading } = useUser();
   const axiosSecure = useAxiosSecure();
   const { loading: authLoading } = useAuth();
-
   const userId = isUser?._id;
 
   const {
@@ -26,6 +26,19 @@ const MyDeliveryList = () => {
     },
   });
 
+  const handleDeliveryStatus = async (item) => {
+    console.log(item);
+    const res = await axiosSecure.patch(`/delivery-status/${item.percelId}`);
+    console.log(res.data);
+    if (res.data.modifiedCount === 1) {
+      Swal.fire({
+        title: "Good job!",
+        text: `Product Delivery to ${item.deliveryDetails.reciverName} Success`,
+        icon: "success",
+      });
+    }
+  };
+
   // Handle loading state
   if (isUserLoading || authLoading || isLoading) return <Loading />;
 
@@ -36,6 +49,8 @@ const MyDeliveryList = () => {
         Error: {error.message || "Failed to fetch delivery details"}
       </div>
     );
+
+  console.log(data);
 
   return (
     <div>
@@ -88,8 +103,15 @@ const MyDeliveryList = () => {
                     </td>
                     <td className="border border-gray-300 px-4 py-2">date</td>
                     <td className="border border-gray-300 px-4 py-2 text-center">
-                      <button className="btn btn-red">Cancel</button>
-                      <button className="btn btn-green ml-2">Deliver</button>
+                      <button className="btn bg-red-600 text-white">
+                        Cancel
+                      </button>
+                      <button
+                        onClick={() => handleDeliveryStatus(item)}
+                        className="btn btn-warning ml-2"
+                      >
+                        Deliver
+                      </button>
                     </td>
                   </tr>
                 ))}

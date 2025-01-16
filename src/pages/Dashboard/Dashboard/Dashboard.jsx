@@ -61,7 +61,7 @@ const Dashboard = () => {
           </>
         )}
 
-        {user && (
+        {!user && (
           <>
             <li>
               <NavLink
@@ -131,6 +131,21 @@ const Dashboard = () => {
                   alt="reviews icon"
                 />
                 <span className="font-semibold text-gray-700">My Reviews</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="profile"
+                className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
+              >
+                <img
+                  className="w-8 h-8"
+                  src={bookedPercel}
+                  alt="reviews icon"
+                />
+                <span className="font-semibold text-gray-700">
+                  Delivery History
+                </span>
               </NavLink>
             </li>
           </>
