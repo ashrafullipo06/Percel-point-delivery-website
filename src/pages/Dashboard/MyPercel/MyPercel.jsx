@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { format } from "date-fns";
 
 const MyPercel = () => {
   const axiosSecure = useAxiosSecure();
@@ -82,9 +83,33 @@ const MyPercel = () => {
                     <th>{i + 1}</th>
 
                     <td>{percel.percelType}</td>
-                    <td>Requested Date</td>
-                    <td>Delivery Date</td>
-                    <td>Purple</td>
+                    <td>
+                      {format(
+                        new Date(percel?.requestedDeliveryDate),
+                        "dd MMM, yy"
+                      )}
+                    </td>
+                    <td>
+                      {percel?.assignDeliveryDate ? (
+                        <span className="font-semibold">
+                          {format(
+                            new Date(percel?.requestedDeliveryDate),
+                            "dd MMM , yy"
+                          )}
+                        </span>
+                      ) : (
+                        "Not Assign"
+                      )}
+                    </td>
+                    <td>
+                      {percel?.bookingDate ? (
+                        <span>
+                          {format(new Date(percel?.bookingDate), "dd MMM , yy")}
+                        </span>
+                      ) : (
+                        "Not Assign"
+                      )}
+                    </td>
                     <td>Purple</td>
                     <td>
                       <span

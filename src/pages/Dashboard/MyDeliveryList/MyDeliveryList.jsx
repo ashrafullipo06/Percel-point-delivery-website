@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUser from "../../../hooks/useUser";
 import Loading from "../../shared/Loading/Loading";
 import Swal from "sweetalert2";
+import { format } from "date-fns";
 
 const MyDeliveryList = () => {
   const { isUser, isUserLoading } = useUser();
@@ -123,12 +124,19 @@ const MyDeliveryList = () => {
                       {item.deliveryDetails?.reciverPhone || "N/A"}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
-                      {item.deliveryDetails?.address || "N/A"}
+                      {item.deliveryDetails?.deliveryAddress || "N/A"}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
                       {item.deliveryDetails?.location || "N/A"}
                     </td>
-                    <td className="border border-gray-300 px-4 py-2">date</td>
+                    <td className="border border-gray-300 px-4 py-2">
+                      {item.deliveryDetails?.assignDeliveryDate
+                        ? format(
+                            new Date(item.deliveryDetails.assignDeliveryDate),
+                            "dd MMM, yy"
+                          )
+                        : "N/A"}
+                    </td>
                     <td className="border border-gray-300 px-4 py-2 text-center">
                       <button
                         onClick={() => handleCancelOrder(item)}

@@ -12,6 +12,7 @@ const Modal = ({ selectPercel, refetch }) => {
   const [deliveryDate, setDeliveryDate] = useState(new Date());
   const [deliveryManDetails, setDeliveryManDetails] = useState(null); // State to store selected delivery man details
   const axiosSecure = useAxiosSecure();
+  console.log(deliveryDate);
 
   const resetValues = () => {
     setDeliveryManDetails(null);
@@ -24,7 +25,6 @@ const Modal = ({ selectPercel, refetch }) => {
       toast.error("Please select a delivery man.");
       return;
     }
-
     const percelId = selectPercel._id;
     const approximateDeliveryDate = deliveryDate;
     const deliveryManId = deliveryManDetails._id;
