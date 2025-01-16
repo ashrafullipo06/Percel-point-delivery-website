@@ -11,6 +11,7 @@ import PercelBook from "../pages/Dashboard/PercelBook/PercelBook";
 import MyPercel from "../pages/Dashboard/MyPercel/MyPercel";
 import AllPercels from "../pages/AllPercels/AllPercels";
 import AllDeliveryMen from "../pages/Dashboard/AllDeliveryMen/AllDeliveryMen";
+import MyDeliveryList from "../pages/Dashboard/MyDeliveryList/MyDeliveryList";
 
 const Router = createBrowserRouter([
   {
@@ -58,6 +59,11 @@ const Router = createBrowserRouter([
         path: "all-delivery-men",
         element: <AllDeliveryMen />,
       },
+      // ! Delivery Man
+      {
+        path: 'my-delivery-list',
+        element: <MyDeliveryList/>
+      }
     ],
   },
 ]);

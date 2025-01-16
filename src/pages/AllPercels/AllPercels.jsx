@@ -89,7 +89,7 @@ const AllPercels = () => {
                 <td className="px-6 py-4 text-center">
                   <button
                     onClick={() => handleManage(percel)}
-                    className="btn btn-sm bg-orange-500 text-white hover:bg-orange-600 text-xl rounded-full"
+                    className="btn btn-sm bg-orange-500 text-white hover:bg-orange-600 text-xl "
                   >
                     <IoIosSettings />
                   </button>
@@ -99,7 +99,7 @@ const AllPercels = () => {
           </tbody>
         </table>
       </div>
-      <Modal selectPercel={selectPercel} />
+      <Modal selectPercel={selectPercel} refetch={refetch} />
     </div>
   );
 };
