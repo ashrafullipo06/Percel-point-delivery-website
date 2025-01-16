@@ -5,12 +5,13 @@ import percel from "../../../assets/dashboard/booked.png";
 import bookedPercel from "../../../assets/dashboard/checklist.png";
 import home from "../../../assets/dashboard/home.png";
 import useAdmin from "../../../hooks/useAdmin";
+import useDeliveryMan from "../../../hooks/useDeliveryMan";
 
 const Dashboard = () => {
   const { isAdmin, isAdminLoading } = useAdmin();
-  // console.log(isAdmin);
+  const { isDeliveryMan, isDeliveryManLoading } = useDeliveryMan();
+
   const user = false;
-  const deliveryMen = !false;
 
   return (
     <div className="h-screen bg-base-200 flex flex-col">
@@ -61,7 +62,7 @@ const Dashboard = () => {
           </>
         )}
 
-        {!user && (
+        {user && (
           <>
             <li>
               <NavLink
@@ -103,7 +104,7 @@ const Dashboard = () => {
           </>
         )}
 
-        {deliveryMen && (
+        {isDeliveryMan && (
           <>
             <li>
               <NavLink

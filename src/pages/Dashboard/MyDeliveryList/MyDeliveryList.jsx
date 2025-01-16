@@ -17,6 +17,7 @@ const MyDeliveryList = () => {
     isLoading,
     isError,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["delivery-details", userId],
     enabled: !!userId,
@@ -37,6 +38,32 @@ const MyDeliveryList = () => {
         icon: "success",
       });
     }
+  };
+
+  const handleCancelOrder = async (item) => {
+    console.log("handleCancelOrder triggered with item:", item);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/delivery-order/${item._id}`);
+        // console.log(res);
+        if (res.data.deletedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your order has been deleted.",
+            icon: "success",
+          });
+        }
+      }
+    });
   };
 
   // Handle loading state
@@ -103,15 +130,24 @@ const MyDeliveryList = () => {
                     </td>
                     <td className="border border-gray-300 px-4 py-2">date</td>
                     <td className="border border-gray-300 px-4 py-2 text-center">
-                      <button className="btn bg-red-600 text-white">
+                      <button
+                        onClick={() => handleCancelOrder(item)}
+                        className="btn bg-red-600 text-white"
+                      >
                         Cancel
                       </button>
-                      <button
-                        onClick={() => handleDeliveryStatus(item)}
-                        className="btn btn-warning ml-2"
-                      >
-                        Deliver
-                      </button>
+                      {item.deliveryDetails.status === "Delivered" ? (
+                        <button disabled className="btn ml-2">
+                          Deliver
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleDeliveryStatus(item)}
+                          className="btn btn-warning ml-2"
+                        >
+                          Deliver
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
