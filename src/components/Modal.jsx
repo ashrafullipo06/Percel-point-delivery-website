@@ -12,7 +12,7 @@ const Modal = ({ selectPercel, refetch }) => {
   const [deliveryDate, setDeliveryDate] = useState(new Date());
   const [deliveryManDetails, setDeliveryManDetails] = useState(null); // State to store selected delivery man details
   const axiosSecure = useAxiosSecure();
-  console.log(deliveryDate);
+  // console.log(deliveryDate);
 
   const resetValues = () => {
     setDeliveryManDetails(null);
@@ -39,7 +39,7 @@ const Modal = ({ selectPercel, refetch }) => {
       deliveryManPhoneNumber,
       deliveryManPhoto,
     };
-    console.log(details);
+    // console.log(details);
     const res = await axiosSecure.post("/delivery-list", details);
     if (res.data.insertedId) {
       // Add API logic for assigning the delivery man here
@@ -52,9 +52,9 @@ const Modal = ({ selectPercel, refetch }) => {
 
   const handleDeliveryManInfo = async (email) => {
     try {
-      console.log("Selected Email:", email);
+      // console.log("Selected Email:", email);
       const res = await axiosSecure.get(`/user/${email}`);
-      console.log("Response Data:", res.data);
+      // console.log("Response Data:", res.data);
       setDeliveryManDetails(res.data); // Update state with selected delivery man details
     } catch (error) {
       console.error("Error fetching delivery man info:", error);

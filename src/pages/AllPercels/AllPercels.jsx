@@ -16,7 +16,7 @@ const AllPercels = () => {
   };
 
   if (isLoading) return <Loading />;
-  console.log(allPercels);
+  // console.log(allPercels);
 
   return (
     <div className="container mx-auto p-6">
@@ -86,7 +86,18 @@ const AllPercels = () => {
                   {format(new Date(percel.requestedDeliveryDate), "dd MMM, yy")}
                 </td>
                 <td className="px-6 py-4 text-center">{percel.cost} tk</td>
-                <td className="px-6 py-4 text-center">{percel.status}</td>
+                <td className="px-6 py-4 text-center">
+                  {percel.status === "Delivered" ? (
+                    <span className="bg-green-500 text-white px-3 py-1 rounded-md">
+                      Delivered
+                    </span>
+                  ) : (
+                    <span className="bg-orange-500 text-white px-3 py-1 rounded-md">
+                      Pending
+                    </span>
+                  )}
+                  {console.log(percel.status)}
+                </td>
                 <td className="px-6 py-4 text-center">
                   {percel.status === "Delivered" ? (
                     <button

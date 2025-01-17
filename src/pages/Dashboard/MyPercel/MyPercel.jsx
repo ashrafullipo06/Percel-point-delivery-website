@@ -9,13 +9,18 @@ import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import ReviewModal from "../../../components/ReviewModal";
 import { useState } from "react";
+import Loading from "../../shared/Loading/Loading";
 
 const MyPercel = () => {
   const axiosSecure = useAxiosSecure();
   const { isUser } = useUser();
   const [ratingInfo, setRatingInfo] = useState(null);
 
-  const { data: percels = [], refetch } = useQuery({
+  const {
+    data: percels = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["percel"],
     enabled: !!isUser?._id,
     queryFn: async () => {
@@ -49,6 +54,8 @@ const MyPercel = () => {
       }
     });
   };
+
+  // if (isLoading) return <Loading />;
 
   return (
     <div>
@@ -145,14 +152,22 @@ const MyPercel = () => {
                           </button>
                         </>
                       )}
-                      {percel.status === "Delivered" && (
-                        <button
-                          onClick={() => {
-                            setRatingInfo(percel);
-                            document.getElementById("reviewModal").showModal();
-                          }}
-                          className="btn "
-                        >
+                      {percel.status === "Delivered" &&
+                        percel?.reviewStatus === false && (
+                          <button
+                            onClick={() => {
+                              setRatingInfo(percel);
+                              document
+                                .getElementById("reviewModal")
+                                .showModal();
+                            }}
+                            className="btn "
+                          >
+                            Review
+                          </button>
+                        )}
+                      {percel?.reviewStatus === true && (
+                        <button disabled className="btn">
                           Review
                         </button>
                       )}
