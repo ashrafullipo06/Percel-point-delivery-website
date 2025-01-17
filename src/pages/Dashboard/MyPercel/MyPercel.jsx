@@ -7,10 +7,13 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
+import ReviewModal from "../../../components/ReviewModal";
+import { useState } from "react";
 
 const MyPercel = () => {
   const axiosSecure = useAxiosSecure();
   const { isUser } = useUser();
+  const [ratingInfo, setRatingInfo] = useState(null);
 
   const { data: percels = [], refetch } = useQuery({
     queryKey: ["percel"],
@@ -107,7 +110,11 @@ const MyPercel = () => {
                         "Not Assign"
                       )}
                     </td>
-                    <td>Purple</td>
+                    <td>
+                      {percel.deliveryManName
+                        ? `${percel.deliveryManName}`
+                        : "Not Assign"}
+                    </td>
                     <td>
                       <span
                         className={`${
@@ -120,7 +127,7 @@ const MyPercel = () => {
                       </span>
                     </td>
                     <td className="flex items-center gap-2">
-                      {percel.status === "pending" ? (
+                      {percel.status === "pending" && (
                         <>
                           <Link
                             to={`/dashboard/update-booked-percel/${percel._id}`}
@@ -128,7 +135,6 @@ const MyPercel = () => {
                           >
                             <CiEdit />
                           </Link>
-
                           <button
                             onClick={() => {
                               handleDelete(percel);
@@ -138,18 +144,17 @@ const MyPercel = () => {
                             <MdDelete />
                           </button>
                         </>
-                      ) : (
-                        <>
-                          <button disabled className="btn text-xl">
-                            <CiEdit />
-                          </button>
-                          <button
-                            disabled
-                            className="text-xl text-red-500 btn bg-orange-200"
-                          >
-                            <MdDelete />
-                          </button>
-                        </>
+                      )}
+                      {percel.status === "Delivered" && (
+                        <button
+                          onClick={() => {
+                            setRatingInfo(percel);
+                            document.getElementById("reviewModal").showModal();
+                          }}
+                          className="btn "
+                        >
+                          Review
+                        </button>
                       )}
                     </td>
                   </tr>
@@ -159,6 +164,7 @@ const MyPercel = () => {
           </div>
         )}
       </div>
+      <ReviewModal ratingInfo={ratingInfo} />
     </div>
   );
 };

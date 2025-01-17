@@ -28,7 +28,15 @@ const Modal = ({ selectPercel, refetch }) => {
     const percelId = selectPercel._id;
     const approximateDeliveryDate = deliveryDate;
     const deliveryManId = deliveryManDetails._id;
-    const details = { percelId, approximateDeliveryDate, deliveryManId };
+    const deliveryManName = deliveryManDetails.name;
+    const deliveryManPhoneNumber = deliveryManDetails.phone;
+    const details = {
+      percelId,
+      deliveryManId,
+      approximateDeliveryDate,
+      deliveryManName,
+      deliveryManPhoneNumber,
+    };
     console.log(details);
     const res = await axiosSecure.post("/delivery-list", details);
     if (res.data.insertedId) {
