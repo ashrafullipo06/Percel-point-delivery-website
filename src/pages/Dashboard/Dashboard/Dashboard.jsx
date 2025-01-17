@@ -123,7 +123,7 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink
-                to="profile"
+                to="my-reviews"
                 className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
               >
                 <img
@@ -136,7 +136,7 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink
-                to="profile"
+                to="delivery-history"
                 className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
               >
                 <img
