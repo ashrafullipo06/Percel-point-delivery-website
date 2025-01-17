@@ -16,6 +16,7 @@ const AllPercels = () => {
   };
 
   if (isLoading) return <Loading />;
+  console.log(allPercels);
 
   return (
     <div className="container mx-auto p-6">
@@ -87,12 +88,21 @@ const AllPercels = () => {
                 <td className="px-6 py-4 text-center">{percel.cost} tk</td>
                 <td className="px-6 py-4 text-center">{percel.status}</td>
                 <td className="px-6 py-4 text-center">
-                  <button
-                    onClick={() => handleManage(percel)}
-                    className="btn btn-sm bg-orange-500 text-white hover:bg-orange-600 text-xl "
-                  >
-                    <IoIosSettings />
-                  </button>
+                  {percel.status === "Delivered" ? (
+                    <button
+                      disabled
+                      className="btn btn-sm bg-orange-500 text-white hover:bg-orange-600 text-xl "
+                    >
+                      <IoIosSettings />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleManage(percel)}
+                      className="btn btn-sm bg-orange-500 text-white hover:bg-orange-600 text-xl "
+                    >
+                      <IoIosSettings />
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
