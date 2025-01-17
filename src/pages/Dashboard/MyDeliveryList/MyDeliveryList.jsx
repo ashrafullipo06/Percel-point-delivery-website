@@ -6,6 +6,7 @@ import useUser from "../../../hooks/useUser";
 import Loading from "../../shared/Loading/Loading";
 import Swal from "sweetalert2";
 import { format } from "date-fns";
+import LocationModal from "../../../components/LocationModal";
 
 const MyDeliveryList = () => {
   const { isUser, isUserLoading } = useUser();
@@ -80,6 +81,11 @@ const MyDeliveryList = () => {
 
   console.log(data);
 
+  const handleLocation = (location) => {
+    console.log(location);
+    <button className="btn">open modal</button>;
+  };
+
   return (
     <div>
       <Heading title="My Delivery List" />
@@ -94,6 +100,7 @@ const MyDeliveryList = () => {
                   <th className="border border-gray-300 px-4 py-2">
                     Booked By
                   </th>
+                  <th className="border border-gray-300 px-4 py-2">Phone</th>
                   <th className="border border-gray-300 px-4 py-2">Receiver</th>
                   <th className="border border-gray-300 px-4 py-2">Phone</th>
                   <th className="border border-gray-300 px-4 py-2">Address</th>
@@ -118,6 +125,9 @@ const MyDeliveryList = () => {
                       {item.bookedUser?.name || "N/A"}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
+                      {item.bookedUser?.phone || "N/A"}
+                    </td>
+                    <td className="border border-gray-300 px-4 py-2">
                       {item.deliveryDetails?.reciverName || "N/A"}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
@@ -127,7 +137,14 @@ const MyDeliveryList = () => {
                       {item.deliveryDetails?.deliveryAddress || "N/A"}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
-                      {item.deliveryDetails?.location || "N/A"}
+                      <button
+                        onClick={() =>
+                          document.getElementById("my_modal_3").showModal()
+                        }
+                        className="btn"
+                      >
+                        Location
+                      </button>
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
                       {item.deliveryDetails?.assignDeliveryDate
@@ -168,6 +185,7 @@ const MyDeliveryList = () => {
           )}
         </div>
       </div>
+      <LocationModal />
     </div>
   );
 };

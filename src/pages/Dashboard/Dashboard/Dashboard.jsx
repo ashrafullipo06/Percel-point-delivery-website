@@ -11,7 +11,7 @@ const Dashboard = () => {
   const { isAdmin, isAdminLoading } = useAdmin();
   const { isDeliveryMan, isDeliveryManLoading } = useDeliveryMan();
 
-  const user = false;
+  const user = !false;
 
   return (
     <div className="h-screen bg-base-200 flex flex-col">
@@ -94,7 +94,7 @@ const Dashboard = () => {
             </li>
             <li>
               <NavLink
-                to="profile"
+                to="my-profile"
                 className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
               >
                 <img className="w-8 h-8" src={percel} alt="Profile Icon" />

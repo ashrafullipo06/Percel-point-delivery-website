@@ -6,6 +6,7 @@ import { CiEdit } from "react-icons/ci";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
 
 const MyPercel = () => {
   const axiosSecure = useAxiosSecure();
@@ -44,10 +45,6 @@ const MyPercel = () => {
         }
       }
     });
-  };
-
-  const handleUpdate = (percel) => {
-    console.log(percel);
   };
 
   return (
@@ -123,20 +120,37 @@ const MyPercel = () => {
                       </span>
                     </td>
                     <td className="flex items-center gap-2">
-                      <button
-                        onClick={() => handleUpdate(percel)}
-                        className="btn text-xl"
-                      >
-                        <CiEdit />
-                      </button>
-                      <button
-                        onClick={() => {
-                          handleDelete(percel);
-                        }}
-                        className="text-xl text-red-500 btn bg-orange-200"
-                      >
-                        <MdDelete />
-                      </button>
+                      {percel.status === "pending" ? (
+                        <>
+                          <Link
+                            to={`/dashboard/update-booked-percel/${percel._id}`}
+                            className="btn text-xl"
+                          >
+                            <CiEdit />
+                          </Link>
+
+                          <button
+                            onClick={() => {
+                              handleDelete(percel);
+                            }}
+                            className="text-xl text-red-500 btn bg-orange-200"
+                          >
+                            <MdDelete />
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button disabled className="btn text-xl">
+                            <CiEdit />
+                          </button>
+                          <button
+                            disabled
+                            className="text-xl text-red-500 btn bg-orange-200"
+                          >
+                            <MdDelete />
+                          </button>
+                        </>
+                      )}
                     </td>
                   </tr>
                 ))}

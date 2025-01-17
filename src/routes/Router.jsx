@@ -12,6 +12,8 @@ import MyPercel from "../pages/Dashboard/MyPercel/MyPercel";
 import AllPercels from "../pages/AllPercels/AllPercels";
 import AllDeliveryMen from "../pages/Dashboard/AllDeliveryMen/AllDeliveryMen";
 import MyDeliveryList from "../pages/Dashboard/MyDeliveryList/MyDeliveryList";
+import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
+import UpdateBookedPercel from "../pages/Dashboard/UpdateBookedPercel/UpdateBookedPercel";
 
 const Router = createBrowserRouter([
   {
@@ -46,6 +48,14 @@ const Router = createBrowserRouter([
         path: "my-percel",
         element: <MyPercel />,
       },
+      {
+        path: "my-profile",
+        element: <MyProfile />,
+      },
+      {
+        path: "update-booked-percel/:id",
+        element: <UpdateBookedPercel />,
+      },
       // ! Admin
       {
         path: "users",
@@ -61,9 +71,9 @@ const Router = createBrowserRouter([
       },
       // ! Delivery Man
       {
-        path: 'my-delivery-list',
-        element: <MyDeliveryList/>
-      }
+        path: "my-delivery-list",
+        element: <MyDeliveryList />,
+      },
     ],
   },
 ]);
