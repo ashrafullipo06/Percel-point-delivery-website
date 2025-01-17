@@ -3,28 +3,57 @@ import { Rating } from "@smastrom/react-rating";
 
 import "@smastrom/react-rating/style.css";
 import { useState } from "react";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ReviewModal = ({ ratingInfo }) => {
   const [rating, setRating] = useState(0);
+  const axiosSecure = useAxiosSecure();
 
-  const handleClose = () => {
-    document.getElementById("reviewModal").close();
-  };
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const productId = ratingInfo?._id;
     const userName = ratingInfo.userDetails.name;
-    
+    const userPhoto = ratingInfo.userDetails.imgDisplayUrl;
+    const deliverManName = ratingInfo.deliveryManName;
+    const deliverManId = ratingInfo.deliveryManId;
+    const delivermanPhoto = ratingInfo.deliveryManPhoto;
+    const feedBack = data.feedback;
 
-
-    document.getElementById("reviewModal").close();
+    console.log(data);
+    const details = {
+      productId,
+      userName,
+      userPhoto,
+      deliverManName,
+      deliverManId,
+      delivermanPhoto,
+      feedBack,
+      rating,
+    };
+    console.log(details);
+    const res = await axiosSecure.post("/ratings", details);
+    if (res.data.insertedId) {
+      document.getElementById("reviewModal").close();
+      Swal.fire({
+        text: "Thanks For your FeedBack",
+        icon: "success",
+      });
+      setRating(0);
+      reset();
+    }
   };
-  console.log(ratingInfo);
+  const handleClose = () => {
+    document.getElementById("reviewModal").close();
+    setRating(0);
+    reset();
+  };
 
   return (
     <div>
