@@ -179,7 +179,7 @@ const MyPercel = () => {
           </div>
         )}
       </div>
-      <ReviewModal ratingInfo={ratingInfo} />
+      <ReviewModal refetch={refetch} ratingInfo={ratingInfo} />
     </div>
   );
 };

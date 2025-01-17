@@ -93,7 +93,7 @@ const AllPercels = () => {
                     </span>
                   ) : (
                     <span className="bg-orange-500 text-white px-3 py-1 rounded-md">
-                      Pending
+                      {percel.status}
                     </span>
                   )}
                   {console.log(percel.status)}

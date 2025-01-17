@@ -34,6 +34,7 @@ const MyDeliveryList = () => {
     const res = await axiosSecure.patch(`/delivery-status/${item.percelId}`);
     console.log(res.data);
     if (res.data.modifiedCount === 1) {
+      refetch();
       Swal.fire({
         title: "Good job!",
         text: `Product Delivery to ${item.deliveryDetails.reciverName} Success`,

@@ -6,7 +6,7 @@ import { useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const ReviewModal = ({ ratingInfo }) => {
+const ReviewModal = ({ ratingInfo, refetch }) => {
   const [rating, setRating] = useState(0);
   const axiosSecure = useAxiosSecure();
 
@@ -41,6 +41,7 @@ const ReviewModal = ({ ratingInfo }) => {
     const res = await axiosSecure.post("/ratings", details);
     if (res.data.insertedId) {
       document.getElementById("reviewModal").close();
+      refetch();
       Swal.fire({
         text: "Thanks For your FeedBack",
         icon: "success",
