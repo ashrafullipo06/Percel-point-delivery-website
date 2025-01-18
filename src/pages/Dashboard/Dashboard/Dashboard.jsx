@@ -11,7 +11,7 @@ const Dashboard = () => {
   const { userRole } = useUserRole();
 
   return (
-    <div className="h-screen bg-base-200 flex flex-col">
+    <div className="md:h-screen bg-base-200 flex flex-col">
       <Link
         to="/dashboard"
         className="text-3xl font-bold text-center pt-8 text-gray-800"
@@ -20,10 +20,9 @@ const Dashboard = () => {
       </Link>
       <div className="border-b-2 border-gray-300 mx-6 my-4"></div>
 
+      {/* Mobile Menu Toggle */}
       <ul className="px-6 space-y-4">
-        {/* User */}
-
-        {/* Admin Section */}
+        {/* User Role-Based Sections */}
         {userRole === "admin" && (
           <>
             <li>
@@ -31,7 +30,7 @@ const Dashboard = () => {
                 to="all-percels"
                 className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
               >
-                <img className="w-8 h-8" src={percel} alt="Users Icon" />
+                <img className="w-8 h-8" src={percel} alt="All Percel Icon" />
                 <span className="font-semibold text-gray-700">All Percel</span>
               </NavLink>
             </li>
@@ -114,7 +113,7 @@ const Dashboard = () => {
                 <img
                   className="w-8 h-8"
                   src={bookedPercel}
-                  alt="Profile Icon"
+                  alt="Delivery List Icon"
                 />
                 <span className="font-semibold text-gray-700">
                   My Delivery List
@@ -129,7 +128,7 @@ const Dashboard = () => {
                 <img
                   className="w-8 h-8"
                   src={bookedPercel}
-                  alt="reviews icon"
+                  alt="Reviews Icon"
                 />
                 <span className="font-semibold text-gray-700">My Reviews</span>
               </NavLink>
@@ -142,7 +141,7 @@ const Dashboard = () => {
                 <img
                   className="w-8 h-8"
                   src={bookedPercel}
-                  alt="reviews icon"
+                  alt="Delivery History Icon"
                 />
                 <span className="font-semibold text-gray-700">
                   Delivery History
