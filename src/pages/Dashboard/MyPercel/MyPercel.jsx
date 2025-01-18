@@ -162,7 +162,7 @@ const MyPercel = () => {
                           </button>
                         </>
                       )}
-                      {percel.status === "delivered" &&
+                      {percel.status === "Delivered" &&
                         !percel.reviewStatus && (
                           <button
                             onClick={() => {
