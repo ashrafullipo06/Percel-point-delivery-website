@@ -17,7 +17,7 @@ const TopRatedDeliveryMan = () => {
     <div>
       <Heading title="Top Rated Delivery Men" />
 
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-8">
         {reviews?.map((review) => (
           <ReviewCard key={review._id} review={review} />
         ))}

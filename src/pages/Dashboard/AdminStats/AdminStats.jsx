@@ -3,9 +3,13 @@ import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts"; // Ensure you have installed react-apexcharts and apexcharts
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Heading from "../../../components/Heading";
+import useUserRole from "../../../hooks/useUserRole";
+import Statistics from "../../Home/Statistics/Statistics";
+import AdminStatistic from "../../../components/AdminStatistic";
 
 const ApexChart = () => {
   const axiosPublic = useAxiosPublic();
+  const { userRole } = useUserRole();
   const { data = [] } = useQuery({
     queryKey: ["admin-stats"],
     queryFn: async () => {
@@ -78,18 +82,25 @@ const ApexChart = () => {
       }));
     }
   }, [data]);
+  console.log(userRole);
 
   return (
     <div>
-      <Heading title="Booking Count By Date" />
-      <div id="chart">
-        <ReactApexChart
-          options={state.options}
-          series={state.series}
-          type="bar"
-          height={350}
-        />
-      </div>
+      {userRole === "admin" && (
+        <div>
+          <Heading title="Booking Count By Date" />
+          <div id="chart">
+            <ReactApexChart
+              options={state.options}
+              series={state.series}
+              type="bar"
+              height={350}
+            />
+          </div>
+          <Statistics />
+          <AdminStatistic />
+        </div>
+      )}
     </div>
   );
 };

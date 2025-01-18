@@ -8,7 +8,7 @@ const Features = () => {
   return (
     <section>
       <Heading title="Features" />
-      <div className="grid grid-cols-3 py-4 gap-8 ">
+      <div className="grid md:grid-cols-3 py-4 gap-8 ">
         <FeatureCard
           img={img1}
           title="Fast Delivery"

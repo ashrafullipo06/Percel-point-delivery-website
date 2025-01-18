@@ -16,7 +16,7 @@ const Statistics = () => {
   });
   console.log(data);
   return (
-    <div className="grid grid-cols-3 gap-8 ">
+    <div className="grid md:grid-cols-3 gap-8 ">
       <StatisticCard
         img={booked}
         countNumber={data.totalBooked}

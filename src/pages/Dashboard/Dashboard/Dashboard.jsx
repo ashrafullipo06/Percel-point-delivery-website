@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import userimg from "../../../assets/dashboard/users.png";
 import deleveryMen from "../../../assets/dashboard/delivery.png";
 import percel from "../../../assets/dashboard/booked.png";
@@ -12,9 +12,12 @@ const Dashboard = () => {
 
   return (
     <div className="h-screen bg-base-200 flex flex-col">
-      <h1 className="text-3xl font-bold text-center pt-8 text-gray-800">
+      <Link
+        to="/dashboard"
+        className="text-3xl font-bold text-center pt-8 text-gray-800"
+      >
         Dashboard
-      </h1>
+      </Link>
       <div className="border-b-2 border-gray-300 mx-6 my-4"></div>
 
       <ul className="px-6 space-y-4">
