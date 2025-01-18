@@ -4,14 +4,11 @@ import deleveryMen from "../../../assets/dashboard/delivery.png";
 import percel from "../../../assets/dashboard/booked.png";
 import bookedPercel from "../../../assets/dashboard/checklist.png";
 import home from "../../../assets/dashboard/home.png";
-import useAdmin from "../../../hooks/useAdmin";
-import useDeliveryMan from "../../../hooks/useDeliveryMan";
+
+import useUserRole from "../../../hooks/useUserRole";
 
 const Dashboard = () => {
-  const { isAdmin, isAdminLoading } = useAdmin();
-  const { isDeliveryMan, isDeliveryManLoading } = useDeliveryMan();
-
-  const user = !false;
+  const { userRole } = useUserRole();
 
   return (
     <div className="h-screen bg-base-200 flex flex-col">
@@ -24,7 +21,7 @@ const Dashboard = () => {
         {/* User */}
 
         {/* Admin Section */}
-        {isAdmin && (
+        {userRole === "admin" && (
           <>
             <li>
               <NavLink
@@ -62,7 +59,7 @@ const Dashboard = () => {
           </>
         )}
 
-        {user && (
+        {userRole === "user" && (
           <>
             <li>
               <NavLink
@@ -104,7 +101,7 @@ const Dashboard = () => {
           </>
         )}
 
-        {isDeliveryMan && (
+        {userRole === "deliveryMan" && (
           <>
             <li>
               <NavLink

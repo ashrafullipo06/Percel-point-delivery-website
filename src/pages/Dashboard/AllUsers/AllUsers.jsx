@@ -83,13 +83,13 @@ const AllUsers = () => {
                 Email
               </th>
               <th className="px-6 py-3 text-center text-sm font-semibold uppercase">
-                Request to Be
+                Requested Role
               </th>
               <th className="px-6 py-3 text-center text-sm font-semibold uppercase">
-                Role
+                Current Role
               </th>
               <th className="px-6 py-3 text-center text-sm font-semibold uppercase">
-                Actions
+                Make Role
               </th>
             </tr>
           </thead>
@@ -132,13 +132,15 @@ const AllUsers = () => {
                     <>
                       <button
                         onClick={() => handleUserRole(user, "user")}
-                        className="btn btn-ghost btn-xs"
+                        className="btn btn-ghost btn-xs tooltip"
+                        data-tip="User"
                       >
-                        <img className="w-6" src={userIcon} alt="User Icon" />
+                        <img className="w-6 " src={userIcon} alt="User Icon" />
                       </button>
                       <button
                         onClick={() => handleUserRole(user, "deliveryMan")}
-                        className="btn btn-ghost btn-xs"
+                        className="btn btn-ghost btn-xs tooltip"
+                        data-tip="Delivery Man"
                       >
                         <img
                           className="w-6"
@@ -152,13 +154,15 @@ const AllUsers = () => {
                     <>
                       <button
                         onClick={() => handleUserRole(user, "admin")}
-                        className="btn btn-ghost btn-xs"
+                        className="btn btn-ghost btn-xs tooltip"
+                        data-tip="Admin"
                       >
                         <img className="w-6" src={adminIcon} alt="Admin Icon" />
                       </button>
                       <button
                         onClick={() => handleUserRole(user, "deliveryMan")}
-                        className="btn btn-ghost btn-xs"
+                        className="btn btn-ghost btn-xs tooltip"
+                        data-tip="Delivery Man"
                       >
                         <img
                           className="w-6"
@@ -172,13 +176,15 @@ const AllUsers = () => {
                     <>
                       <button
                         onClick={() => handleUserRole(user, "admin")}
-                        className="btn btn-ghost btn-xs"
+                        className="btn btn-ghost btn-xs tooltip"
+                        data-tip="Admin"
                       >
                         <img className="w-6" src={adminIcon} alt="Admin Icon" />
                       </button>
                       <button
                         onClick={() => handleUserRole(user, "user")}
-                        className="btn btn-ghost btn-xs"
+                        className="btn btn-ghost btn-xs tooltip"
+                        data-tip="User"
                       >
                         <img className="w-6" src={userIcon} alt="User Icon" />
                       </button>

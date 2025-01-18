@@ -17,6 +17,7 @@ import UpdateBookedPercel from "../pages/Dashboard/UpdateBookedPercel/UpdateBook
 import MyReviews from "../pages/Dashboard/MyReviews/MyReviews";
 import DeliveryHistory from "../pages/Dashboard/DeliveryHistory/DeliveryHistory";
 import Payment from "../pages/Dashboard/Payment/Payment";
+import AdminStats from "../pages/Dashboard/AdminStats/AdminStats";
 
 const Router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const Router = createBrowserRouter([
         element: <Payment />,
       },
       // ! Admin
+      {
+        path: "",
+        element: <AdminStats />,
+      },
       {
         path: "users",
         element: <AllUsers />,

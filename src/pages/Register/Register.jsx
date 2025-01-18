@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
-  const { createUserByEmailPassword, updateUserInfo } = useAuth();
+  const { createUserByEmailPassword, updateUserInfo, handleLogout } = useAuth();
   const axiosPublic = useAxiosPublic();
   const {
     register,
@@ -36,6 +36,7 @@ const Register = () => {
       const userData = await axiosPublic.post("/users", userDetails);
       console.log(userData.data);
       if (userData.data.insertedId) {
+        handleLogout();
         toast.success("Account create successfully.");
       }
     } catch (error) {
