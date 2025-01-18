@@ -23,7 +23,7 @@ const Register = () => {
   }`;
   const onSubmit = async (data) => {
     const { name, email, phone, requestedRole, password } = data;
-    console.log(data);
+    // console.log(data);
     try {
       const imageFile = { image: data.image[0] };
       const res = await axiosPublic.post(imgbb, imageFile, {
@@ -34,7 +34,7 @@ const Register = () => {
       await updateUserInfo(name, imgDisplayUrl);
       const userDetails = { name, email, imgDisplayUrl, phone, requestedRole };
       const userData = await axiosPublic.post("/users", userDetails);
-      console.log(userData.data);
+      // console.log(userData.data);
       if (userData.data.insertedId) {
         handleLogout();
         toast.success("Account create successfully.");

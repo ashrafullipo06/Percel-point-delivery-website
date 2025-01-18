@@ -35,7 +35,7 @@ const useAxiosSecure = () => {
       if (status === 403 || 401) {
         await handleLogout();
         await navigate("/login");
-        console.log("Axios Secure Intercepter ERROR,", error);
+        // console.log("Axios Secure Intercepter ERROR,", error);
       }
       return Promise.reject(error);
     }

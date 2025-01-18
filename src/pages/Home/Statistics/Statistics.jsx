@@ -14,7 +14,7 @@ const Statistics = () => {
       return res.data;
     },
   });
-  console.log(data);
+  // console.log(data);
   return (
     <div className="grid md:grid-cols-3 gap-8 ">
       <StatisticCard

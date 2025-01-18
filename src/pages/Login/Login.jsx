@@ -18,7 +18,7 @@ const Login = () => {
 
   const onSubmit = (data) => {
     const { email, password } = data;
-    console.log(data);
+    // console.log(data);
     signInByExistingAccount(email, password).then(() => {
       toast.success("Sucessfully Login");
     });

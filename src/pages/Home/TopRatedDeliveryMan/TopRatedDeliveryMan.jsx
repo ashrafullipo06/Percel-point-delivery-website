@@ -12,7 +12,7 @@ const TopRatedDeliveryMan = () => {
       return res.data;
     },
   });
-  console.log(isLoading);
+  // console.log(isLoading);
   return (
     <div>
       <Heading title="Top Rated Delivery Men" />

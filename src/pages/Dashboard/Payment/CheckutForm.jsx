@@ -32,7 +32,7 @@ const CheckoutForm = () => {
         setClientSecret(res.data.clientSecret);
       })
       .catch((err) => {
-        console.error("Error fetching client secret:", err);
+        // console.error("Error fetching client secret:", err);
       });
   }, [totalPyableAmount]);
 
@@ -65,10 +65,10 @@ const CheckoutForm = () => {
         });
 
       if (intentError) {
-        console.error("Payment Intent Error:", intentError);
+        // console.error("Payment Intent Error:", intentError);
         setError(intentError.message);
       } else {
-        console.log("PaymentIntent:", paymentIntent);
+        // console.log("PaymentIntent:", paymentIntent);
         setError("");
         Swal.fire({
           title: "Good job!",
@@ -89,7 +89,7 @@ const CheckoutForm = () => {
             status: "pending",
           };
           const res = await axiosSecure.post("/payments", payment);
-          console.log(res.data);
+          // console.log(res.data);
         }
       }
     } catch (err) {

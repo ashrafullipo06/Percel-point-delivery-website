@@ -42,7 +42,7 @@ const PercelBook = () => {
     data.userId = userId;
     data.charge = charge;
     data.requestedDeliveryDate = startDate;
-    console.log(data);
+    // console.log(data);
     // axiosPublic.patch("/percels", data).then((res) => {
     //   if (res.data.insertedId) {
     //     Swal.fire({
@@ -64,7 +64,7 @@ const PercelBook = () => {
   });
 
   if (isLoading) return <Loading />;
-  console.log(data);
+  // console.log(data);
 
   return (
     <section className=" px-6 py-10">

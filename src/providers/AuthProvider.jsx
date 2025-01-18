@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
       const result = await createUserWithEmailAndPassword(auth, email, pass);
       return result;
     } catch (error) {
-      console.error("Error creating user: ", error);
+      // console.error("Error creating user: ", error);
       throw error;
     } finally {
       setLoading(false);
@@ -45,7 +45,7 @@ const AuthProvider = ({ children }) => {
       setUser(result.user);
       return result;
     } catch (error) {
-      console.error("Error with Google login: ", error);
+      // console.error("Error with Google login: ", error);
       throw error;
     } finally {
       setLoading(false);

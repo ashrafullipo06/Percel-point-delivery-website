@@ -30,7 +30,7 @@ const ApexChart = () => {
         type: "bar",
         events: {
           click: function (chart, w, e) {
-            console.log("Chart clicked:", chart, w, e);
+            // console.log("Chart clicked:", chart, w, e);
           },
         },
       },
@@ -82,7 +82,7 @@ const ApexChart = () => {
       }));
     }
   }, [data]);
-  console.log(userRole);
+  // console.log(userRole);
 
   return (
     <div>

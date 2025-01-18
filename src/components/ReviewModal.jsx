@@ -26,7 +26,7 @@ const ReviewModal = ({ ratingInfo, refetch }) => {
     const delivermanPhoto = ratingInfo.deliveryManPhoto;
     const feedBack = data.feedback;
 
-    console.log(data);
+    // console.log(data);
     const details = {
       productId,
       userName,
@@ -37,7 +37,7 @@ const ReviewModal = ({ ratingInfo, refetch }) => {
       feedBack,
       rating,
     };
-    console.log(details);
+    // console.log(details);
     const res = await axiosSecure.post("/ratings", details);
     if (res.data.insertedId) {
       document.getElementById("reviewModal").close();
