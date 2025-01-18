@@ -1,4 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Heading from "../../../components/Heading";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -29,10 +30,17 @@ const MyDeliveryList = () => {
     },
   });
 
+  // Pagination State
+  const itemsPerPage = 5;
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Get Paginated Data
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentData = data.slice(startIndex, startIndex + itemsPerPage);
+
   const handleDeliveryStatus = async (item) => {
-    console.log(item);
     const res = await axiosSecure.patch(`/delivery-status/${item.percelId}`);
-    console.log(res.data);
     if (res.data.modifiedCount === 1) {
       refetch();
       Swal.fire({
@@ -44,7 +52,6 @@ const MyDeliveryList = () => {
   };
 
   const handleCancelOrder = async (item) => {
-    console.log("handleCancelOrder triggered with item:", item);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -56,7 +63,6 @@ const MyDeliveryList = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosSecure.delete(`/delivery-order/${item._id}`);
-        // console.log(res);
         if (res.data.deletedCount > 0) {
           refetch();
           Swal.fire({
@@ -80,19 +86,12 @@ const MyDeliveryList = () => {
       </div>
     );
 
-  console.log(data);
-
-  const handleLocation = (location) => {
-    console.log(location);
-    <button className="btn">open modal</button>;
-  };
-
   return (
     <div>
       <Heading title="My Delivery List" />
       <div className="mt-6">
         <div className="overflow-x-auto">
-          {data.length > 0 ? (
+          {currentData.length > 0 ? (
             <table className="table-auto w-full border-collapse border border-gray-200 shadow-lg">
               {/* Table Head */}
               <thead className="bg-gray-100 text-gray-800">
@@ -114,13 +113,13 @@ const MyDeliveryList = () => {
               </thead>
               {/* Table Body */}
               <tbody className="text-gray-700">
-                {data.map((item, i) => (
+                {currentData.map((item, i) => (
                   <tr
                     key={item._id}
                     className={`${i % 2 === 0 ? "bg-gray-50" : "bg-white"}`}
                   >
                     <td className="border border-gray-300 px-4 py-2 text-center">
-                      {i + 1}
+                      {startIndex + i + 1}
                     </td>
                     <td className="border border-gray-300 px-4 py-2">
                       {item.bookedUser?.name || "N/A"}
@@ -186,6 +185,40 @@ const MyDeliveryList = () => {
           )}
         </div>
       </div>
+
+      {/* Pagination */}
+      <div className="mt-4 flex justify-center items-center gap-2">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+        >
+          Prev
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(index + 1)}
+            className={`px-4 py-2 rounded ${
+              currentPage === index + 1
+                ? "bg-blue-500 text-white"
+                : "bg-gray-300 hover:bg-gray-400"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
+
       <LocationModal />
     </div>
   );

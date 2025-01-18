@@ -16,6 +16,7 @@ import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import UpdateBookedPercel from "../pages/Dashboard/UpdateBookedPercel/UpdateBookedPercel";
 import MyReviews from "../pages/Dashboard/MyReviews/MyReviews";
 import DeliveryHistory from "../pages/Dashboard/DeliveryHistory/DeliveryHistory";
+import Payment from "../pages/Dashboard/Payment/Payment";
 
 const Router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const Router = createBrowserRouter([
       {
         path: "update-booked-percel/:id",
         element: <UpdateBookedPercel />,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
       },
       // ! Admin
       {

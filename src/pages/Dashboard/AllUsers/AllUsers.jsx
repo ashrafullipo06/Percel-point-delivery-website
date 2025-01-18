@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Heading from "../../../components/Heading";
 import useAllUsers from "../../../hooks/useAllUsers";
 import adminIcon from "../../../assets/dashboard/adminIcon.png";
@@ -9,6 +10,11 @@ import Swal from "sweetalert2";
 const AllUsers = () => {
   const { users, isLoading, refetch } = useAllUsers();
   const axiosSecure = useAxiosSecure();
+
+  // Pagination State
+  const itemsPerPage = 5;
+  const totalPages = Math.ceil(users.length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleUserRole = (user, newRole) => {
     Swal.fire({
@@ -37,6 +43,27 @@ const AllUsers = () => {
   if (isLoading) {
     return <div className="text-center mt-10">Loading...</div>;
   }
+
+  // Get users for the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentUsers = users.slice(startIndex, startIndex + itemsPerPage);
+
+  // Pagination Handlers
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
+  const handlePageClick = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="container mx-auto p-6">
@@ -67,16 +94,16 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((user, i) => (
+            {currentUsers.map((user, i) => (
               <tr
                 key={user._id}
                 className={`${
                   i % 2 === 0 ? "bg-gray-50" : "bg-white"
                 } hover:bg-gray-100`}
               >
-                <td className="px-6 py-4 text-center">{i + 1}</td>
+                <td className="px-6 py-4 text-center">{startIndex + i + 1}</td>
                 <td className="px-6 py-4">
-                  <div className="flex items-center justify-center gap-3">
+                  <div className="flex  gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img
@@ -162,6 +189,37 @@ const AllUsers = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Buttons */}
+      <div className="mt-4 flex justify-center items-center gap-2">
+        <button
+          onClick={handlePrev}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+        >
+          Prev
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageClick(index + 1)}
+            className={`px-4 py-2 rounded ${
+              currentPage === index + 1
+                ? "bg-blue-500 text-white"
+                : "bg-gray-300 hover:bg-gray-400"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          onClick={handleNext}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+        >
+          Next
+        </button>
       </div>
     </div>
   );

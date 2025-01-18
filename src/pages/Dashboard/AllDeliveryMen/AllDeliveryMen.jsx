@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../shared/Loading/Loading";
@@ -13,7 +14,32 @@ const AllDeliveryMen = () => {
     },
   });
 
+  // Pagination state
+  const itemsPerPage = 5;
+  const totalPages = Math.ceil(deliveryMens.length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+
   if (isLoading) return <Loading />;
+
+  // Get current page data
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentDeliveryMens = deliveryMens.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
+
+  // Pagination handlers
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+  };
+
+  const handlePageClick = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="container mx-auto p-6">
@@ -41,8 +67,8 @@ const AllDeliveryMen = () => {
             </tr>
           </thead>
           <tbody>
-            {deliveryMens.length > 0 ? (
-              deliveryMens.map((man, i) => (
+            {currentDeliveryMens.length > 0 ? (
+              currentDeliveryMens.map((man, i) => (
                 <tr
                   key={man._id}
                   className={`${
@@ -50,10 +76,10 @@ const AllDeliveryMen = () => {
                   } hover:bg-gray-100`}
                 >
                   <td className="px-6 py-4 text-sm font-medium text-gray-800 text-center">
-                    {i + 1}
+                    {startIndex + i + 1}
                   </td>
                   <td className="px-6 py-4 text-center">
-                    <div className="flex items-center justify-center gap-3">
+                    <div className="flex gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
                           <img
@@ -91,6 +117,37 @@ const AllDeliveryMen = () => {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Buttons */}
+      <div className="mt-4 flex justify-center items-center gap-2">
+        <button
+          onClick={handlePrev}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+        >
+          Prev
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageClick(index + 1)}
+            className={`px-4 py-2 rounded ${
+              currentPage === index + 1
+                ? "bg-blue-500 text-white"
+                : "bg-gray-300 hover:bg-gray-400"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          onClick={handleNext}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-50"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
