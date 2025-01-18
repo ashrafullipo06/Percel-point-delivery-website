@@ -19,7 +19,7 @@ const CheckoutForm = () => {
 
   // Calculate total payable amount
   const totalPyableAmount = percels?.reduce((prev, curr) => {
-    return prev + curr.charge;
+    return prev + curr.charge || 0;
   }, 0);
 
   // Fetch the client secret for test payments

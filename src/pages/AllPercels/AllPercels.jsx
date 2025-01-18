@@ -111,7 +111,7 @@ const AllPercels = () => {
               >
                 <td className="px-6 py-4 text-center">{startIndex + i + 1}</td>
                 <td className="px-6 py-4">
-                  <div className="flex items-center justify-center gap-3">
+                  <div className="flex  gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img
