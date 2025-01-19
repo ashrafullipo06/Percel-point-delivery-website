@@ -1,7 +1,7 @@
 
 
 const PercelTable = ({index,percel}) => {
-    console.log(index,percel);
+    // console.log(index,percel);
     return (
       <div>
       

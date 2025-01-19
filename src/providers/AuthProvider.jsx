@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
       });
       return update;
     } catch (error) {
-      console.log("Error from info update", error);
+      // console.log("Error from info update", error);
       throw error;
     }
   };

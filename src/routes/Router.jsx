@@ -18,6 +18,10 @@ import MyReviews from "../pages/Dashboard/MyReviews/MyReviews";
 import DeliveryHistory from "../pages/Dashboard/DeliveryHistory/DeliveryHistory";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import AdminStats from "../pages/Dashboard/AdminStats/AdminStats";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import DeliveryManRoute from "./DeliveryManRoute";
+import UserRoute from "./UserRoute";
 
 const Router = createBrowserRouter([
   {
@@ -41,28 +45,52 @@ const Router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       //!  User
       {
         path: "book-percel",
-        element: <PercelBook />,
+        element: (
+          <UserRoute>
+            <PercelBook />
+          </UserRoute>
+        ),
       },
       {
         path: "my-percel",
-        element: <MyPercel />,
+        element: (
+          <UserRoute>
+            <MyPercel />
+          </UserRoute>
+        ),
       },
       {
         path: "my-profile",
-        element: <MyProfile />,
+        element: (
+          <UserRoute>
+            <MyProfile />
+          </UserRoute>
+        ),
       },
       {
         path: "update-booked-percel/:id",
-        element: <UpdateBookedPercel />,
+        element: (
+          <UserRoute>
+            <UpdateBookedPercel />
+          </UserRoute>
+        ),
       },
       {
         path: "payment",
-        element: <Payment />,
+        element: (
+          <UserRoute>
+            <Payment />
+          </UserRoute>
+        ),
       },
       // ! Admin
       {
@@ -71,28 +99,52 @@ const Router = createBrowserRouter([
       },
       {
         path: "users",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "all-percels",
-        element: <AllPercels />,
+        element: (
+          <AdminRoute>
+            <AllPercels />
+          </AdminRoute>
+        ),
       },
       {
         path: "all-delivery-men",
-        element: <AllDeliveryMen />,
+        element: (
+          <AdminRoute>
+            <AllDeliveryMen />
+          </AdminRoute>
+        ),
       },
       // ! Delivery Man
       {
         path: "my-delivery-list",
-        element: <MyDeliveryList />,
+        element: (
+          <DeliveryManRoute>
+            <MyDeliveryList />
+          </DeliveryManRoute>
+        ),
       },
       {
         path: "my-reviews",
-        element: <MyReviews />,
+        element: (
+          <DeliveryManRoute>
+            <MyReviews />
+          </DeliveryManRoute>
+        ),
       },
       {
         path: "delivery-history",
-        element: <DeliveryHistory />,
+        element: (
+          <DeliveryManRoute>
+            <DeliveryHistory />
+          </DeliveryManRoute>
+        ),
       },
     ],
   },

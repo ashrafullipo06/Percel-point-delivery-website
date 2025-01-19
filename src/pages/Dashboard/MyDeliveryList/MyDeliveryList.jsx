@@ -41,7 +41,7 @@ const MyDeliveryList = () => {
 
   const handleDeliveryStatus = async (item) => {
     const res = await axiosSecure.patch(`/delivery-status/${item.percelId}`);
-    console.log(item.percelId);
+    // console.log(item.percelId);
     if (res.data.modifiedCount === 1) {
       refetch();
       Swal.fire({

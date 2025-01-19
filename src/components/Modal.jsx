@@ -57,7 +57,7 @@ const Modal = ({ selectPercel, refetch }) => {
       // console.log("Response Data:", res.data);
       setDeliveryManDetails(res.data); // Update state with selected delivery man details
     } catch (error) {
-      console.error("Error fetching delivery man info:", error);
+      // console.error("Error fetching delivery man info:", error);
     }
   };
 
