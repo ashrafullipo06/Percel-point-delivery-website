@@ -6,10 +6,10 @@ Welcome to the **Parcel Point**, a dynamic platform built with the MERN stack fo
 
  **Live Site URL** : https://percel-point.web.app
 
- **Admin Credentials**
+ -**Admin Credentials**
   - Email: `admin@gmail.com`
   - Password: `Hyper@118`
- **Delivery Men Credentials**
+ -**Delivery Men Credentials**
   - Email: `delivery@man.com`
   - Password: `Hyper@118`
 

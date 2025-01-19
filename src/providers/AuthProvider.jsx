@@ -37,19 +37,9 @@ const AuthProvider = ({ children }) => {
   };
 
   // Google login
-  const handleGoogleLogin = async () => {
+  const googleLogin = async () => {
     setLoading(true);
-    try {
-      const result = await signInWithPopup(auth, provider);
-      toast.success("Successfully login");
-      setUser(result.user);
-      return result;
-    } catch (error) {
-      // console.error("Error with Google login: ", error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
+    return signInWithPopup(auth, provider);
   };
 
   const updateUserInfo = async (name, photo) => {
@@ -117,13 +107,13 @@ const AuthProvider = ({ children }) => {
     };
   }, [auth, axiosPublic]);
 
-  // console.log(user);
+  console.log(user);
 
   const authInfo = {
     user,
     loading,
     createUserByEmailPassword,
-    handleGoogleLogin,
+    googleLogin,
     signInByExistingAccount,
     handleLogout,
     updateUserInfo,
