@@ -3,7 +3,7 @@ import useAuth from "../hooks/useAuth";
 import useUserRole from "../hooks/useUserRole";
 import Loading from "../pages/shared/Loading/Loading";
 
-const UserRoute = () => {
+const UserRoute = ({ children }) => {
   const location = useLocation();
   const { user, loading } = useAuth();
   const { userRole, isUserRoleLoading } = useUserRole();
