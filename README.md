@@ -1,17 +1,19 @@
 # Percel Point
 
+![Alt text](/src/assets/percel.png)
+
 Welcome to the **Parcel Point**, a dynamic platform built with the MERN stack for efficient parcel booking, delivery, and management. This project demonstrates a fully functional web application that caters to three types of users: Admin, Delivery Men, and Users.
 
 ## 🚀 Live Demo
 
- **Live Site URL** : https://percel-point.web.app
+**Live Site URL** : https://percel-point.web.app
 
- -**Admin Credentials**
-  - Email: `admin@gmail.com`
-  - Password: `Hyper@118`
- -**Delivery Men Credentials**
-  - Email: `delivery@man.com`
-  - Password: `Hyper@118`
+-**Admin Credentials**
+
+- Email: `admin@gmail.com`
+- Password: `Hyper@118` -**Delivery Men Credentials**
+- Email: `delivery@man.com`
+- Password: `Hyper@118`
 
 ## 📌 Features
 

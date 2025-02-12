@@ -54,7 +54,7 @@ const MyProfile = () => {
       // Exit editing mode
       setIsEditing(false);
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       toast.error("Failed to update profile. Please try again.");
     }
   };

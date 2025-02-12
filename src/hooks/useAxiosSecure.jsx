@@ -31,10 +31,10 @@ const useAxiosSecure = () => {
     async (error) => {
       // Any status codes that falls outside the range of 2xx cause this function to trigger
       // Do something with response error
-      const status = error?.response?.status;
+      const status = error.response.status;
       if (status === 403 || 401) {
         await handleLogout();
-        await navigate("/login");
+        navigate("/login");
         // console.log("Axios Secure Intercepter ERROR,", error);
       }
       return Promise.reject(error);
