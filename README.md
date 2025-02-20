@@ -12,8 +12,10 @@ Welcome to the **Parcel Point**, a dynamic platform built with the MERN stack fo
 -**Admin Credentials**
 
 - Email: `admin@gmail.com`
-- Password: `Hyper@118` <br>
+- Password: `Hyper@118`
+
 -**Delivery Men Credentials**
+
 - Email: `delivery@man.com`
 - Password: `Hyper@118`
 
