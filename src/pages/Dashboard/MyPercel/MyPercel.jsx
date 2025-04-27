@@ -8,8 +8,8 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUser from "../../../hooks/useUser";
 import useCart from "../../../hooks/useCart";
 import Heading from "../../../components/Heading";
-import Loading from "../../shared/Loading/Loading";
 import ReviewModal from "../../../components/ReviewModal";
+import Loading from "../../../components/shared/Loading/Loading";
 
 const MyPercel = () => {
   const axiosSecure = useAxiosSecure();

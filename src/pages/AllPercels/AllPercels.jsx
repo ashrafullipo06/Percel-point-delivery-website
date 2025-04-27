@@ -4,7 +4,7 @@ import useAllPercels from "../../hooks/useAllPercels";
 import { format } from "date-fns";
 import { IoIosSettings } from "react-icons/io";
 import Modal from "../../components/Modal";
-import Loading from "../shared/Loading/Loading";
+import Loading from "../../components/shared/Loading/Loading";
 
 const AllPercels = () => {
   const { allPercels, refetch, isLoading, totalPercel } = useAllPercels();

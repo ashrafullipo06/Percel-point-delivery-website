@@ -4,10 +4,11 @@ import Heading from "../../../components/Heading";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useUser from "../../../hooks/useUser";
-import Loading from "../../shared/Loading/Loading";
+
 import Swal from "sweetalert2";
 import { format } from "date-fns";
 import LocationModal from "../../../components/LocationModal";
+import Loading from "../../../components/shared/Loading/Loading";
 
 const MyDeliveryList = () => {
   const { isUser, isUserLoading } = useUser();

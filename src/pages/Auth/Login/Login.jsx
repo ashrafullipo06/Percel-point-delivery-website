@@ -1,11 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import GoogleLogin from "../shared/GoogleLogin/GoogleLogin";
-import LoginRegisterLottie from "../shared/LoginRegisterLottie/LoginRegisterLottie";
 import logo from "/percel-point.svg";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
+import LoginRegisterLottie from "../../../components/shared/LoginRegisterLottie/LoginRegisterLottie";
+import GoogleLogin from "../../../components/shared/GoogleLogin/GoogleLogin";
 
 const Login = () => {
   const { signInByExistingAccount } = useAuth();

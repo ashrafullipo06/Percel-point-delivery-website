@@ -2,9 +2,9 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
-import Loading from "../../shared/Loading/Loading";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import Loading from "../../../components/shared/Loading/Loading";
 
 const CheckoutForm = () => {
   const { percels, isLoading } = useCart();

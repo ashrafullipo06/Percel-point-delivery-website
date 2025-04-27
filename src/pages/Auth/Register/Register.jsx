@@ -1,13 +1,11 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "/percel-point.svg";
-import LoginRegisterLottie from "../shared/LoginRegisterLottie/LoginRegisterLottie";
-import GoogleLogin from "../shared/GoogleLogin/GoogleLogin";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import GoogleLogin from "../../../components/shared/GoogleLogin/GoogleLogin";
 
 const Register = () => {
   const { createUserByEmailPassword, updateUserInfo, handleLogout } = useAuth();

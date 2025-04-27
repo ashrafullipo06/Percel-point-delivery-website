@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import Loading from "../../shared/Loading/Loading";
 import Heading from "../../../components/Heading";
+import Loading from "../../../components/shared/Loading/Loading";
 
 const AllDeliveryMen = () => {
   const axiosSecure = useAxiosSecure();

@@ -9,7 +9,8 @@ import Heading from "../../../components/Heading";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import Loading from "../../shared/Loading/Loading";
+import Loading from "../../../components/shared/Loading/Loading";
+
 const PercelBook = () => {
   const [charge, setCharge] = useState(0);
   const { isUser, isUserLoading } = useUser();

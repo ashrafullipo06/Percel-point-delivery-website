@@ -1,7 +1,8 @@
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useUserRole from "../hooks/useUserRole";
-import Loading from "../pages/shared/Loading/Loading";
+import Loading from "../components/shared/Loading/Loading";
+
 
 const DeliveryManRoute = ({ children }) => {
   const location = useLocation();
