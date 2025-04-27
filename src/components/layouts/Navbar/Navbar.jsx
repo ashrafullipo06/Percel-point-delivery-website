@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../../../public/percel-point.svg";
+import logo from "/percel-point.svg";
 import useAuth from "../../../hooks/useAuth";
 import { MdNotificationsActive } from "react-icons/md";
 const Navbar = () => {

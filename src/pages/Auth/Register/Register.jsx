@@ -6,6 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import GoogleLogin from "../../../components/shared/GoogleLogin/GoogleLogin";
+import LoginRegisterLottie from "../../../components/shared/LoginRegisterLottie/LoginRegisterLottie";
 
 const Register = () => {
   const { createUserByEmailPassword, updateUserInfo, handleLogout } = useAuth();
