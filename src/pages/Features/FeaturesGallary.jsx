@@ -4,6 +4,7 @@ import safety_c from "../../assets/features/safety_c.jpg";
 import safety_d from "../../assets/features/safety_d.jpg";
 import safety_e from "../../assets/features/safety_e.jpg";
 import safety_f from "../../assets/features/safety_f.jpg";
+import Heading from "../../components/Heading";
 
 const images = [safety_a, safety_b, safety_c, safety_d, safety_e, safety_f];
 
@@ -12,9 +13,7 @@ const FeaturesGallery = () => {
     <div className="bg-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-gray-900">
-            Our Services
-          </h2>
+          <Heading title="Our Services" />
           <p className="mt-4 text-lg text-gray-500">
             Fast, safe, and reliable parcel solutions for everyone.
           </p>

@@ -5,7 +5,7 @@ import {
   FaShieldAlt,
   FaMoneyBillWave,
 } from "react-icons/fa";
-
+import Heading from "../../components/Heading";
 
 const features = [
   {
@@ -39,14 +39,12 @@ const features = [
 const WhyChooseUs = () => {
   return (
     <div className="py-12">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <div className="mx-auto px-2  container">
         <div className="text-center mb-12">
           <h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">
             Features
           </h2>
-          <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-            Why Choose Us
-          </p>
+          <Heading title="Why Choose US" />
           <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
             We offer top-class services to ensure your parcels reach safely and
             quickly.
