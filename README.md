@@ -6,7 +6,7 @@ Welcome to the **Parcel Point**, a dynamic platform built with the MERN stack fo
 
 ## 🚀 Live Demo
 
-**Live Site URL** : https://percel-point.web.app <br>
+**Live Site URL** : https://percel-point-client.vercel.app <br>
 **Server Repo** : https://github.com/aminul118/percel-point-server
 
 -**Admin Credentials**

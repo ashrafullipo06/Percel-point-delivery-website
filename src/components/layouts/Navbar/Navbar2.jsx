@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { FaTasks } from "react-icons/fa";
-import { TbLogout2, TbUsersGroup } from "react-icons/tb";
+import { FaBox, FaTasks, FaUserCircle } from "react-icons/fa";
+import { TbBrandBooking, TbUsersGroup } from "react-icons/tb";
 import { CiMenuFries } from "react-icons/ci";
 import { MdLaptopMac, MdOutlineArrowRightAlt } from "react-icons/md";
 import { BsBuildings, BsCalendar2Date } from "react-icons/bs";
@@ -16,7 +16,6 @@ const ResponsiveNavbar = () => {
   const [isProductHover, setIsProductHover] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [isMegaMenuCollapse, setIsMegaMenuCollapse] = useState(false);
-  const [megaMenuSubItemsOpen, setMegaMenuSubItemsOpen] = useState("");
   const { user, handleLogout, loading } = useAuth();
 
   const handleMenuClick = () => {
@@ -38,40 +37,47 @@ const ResponsiveNavbar = () => {
 
   const moreProducts = [
     {
-      title: "Demo App",
-      img: "https://i.ibb.co/LQBDJGD/icon-logo-container.png",
-      link: "/demo-app",
+      title: "Book a Percel",
+      description: "Can book your percel",
+      icon: <TbBrandBooking className="text-white text-xl" />,
+      link: "/dashboard/book-percel",
     },
     {
-      title: "CRM",
-      img: "https://i.ibb.co/Y8cRWRj/icon-logo-container-1.png",
-      link: "/crm",
+      title: "Booked Percel",
+      description: "Your all booked percel",
+      icon: <FaBox className="text-white text-xl" />,
+      link: "/dashboard/my-percel",
     },
     {
-      title: "CMS",
-      img: "https://i.ibb.co/6bGWgp6/icon-logo-container-2.png",
-      link: "/cms",
+      title: "Your Profile",
+      description: "Can update your profile",
+      icon: <FaUserCircle className="text-white text-xl" />,
+      link: "/dashboard/my-profile",
     },
   ];
 
   const ecoSystem = [
     {
       title: "Directory",
+      description: "Lorem",
       icon: <BsBuildings className="text-white text-xl" />,
       link: "/directory",
     },
     {
       title: "Bookings",
+      description: "Lorem",
       icon: <BsCalendar2Date className="text-white text-xl" />,
       link: "/bookings",
     },
     {
       title: "User Feedback",
+      description: "If you recived percel then able to feedback",
       icon: <TbUsersGroup className="text-white text-xl" />,
-      link: "/user-feedback",
+      link: "/dashboard/my-percel",
     },
     {
       title: "Task Manager",
+      description: "Lorem",
       icon: <FaTasks className="text-white text-xl" />,
       link: "/task-manager",
     },
@@ -252,7 +258,7 @@ const ResponsiveNavbar = () => {
           </ul>
         </div>
 
-        {/* Mega Menu */}
+        {/* Products Mega Menu */}
         <div
           className={`absolute top-full left-0 w-full bg-gray-800 transition-all duration-300 z-40 ${
             isProductHover ? "opacity-100 visible" : "opacity-0 invisible"
@@ -273,12 +279,10 @@ const ResponsiveNavbar = () => {
                   key={idx}
                   className="flex gap-4 items-start group"
                 >
-                  <img src={item.img} alt={item.title} className="w-10 h-10" />
+                  {item.icon}
                   <div>
                     <h4 className="text-white font-medium">{item.title}</h4>
-                    <p className="text-white/80 text-sm">
-                      Lorem ipsum dolor sit amet.
-                    </p>
+                    <p className="text-white/80 text-sm">{item.description}</p>
                     <span className="text-orange-400 mt-2 flex items-center gap-1 text-sm">
                       Call to action
                       <MdOutlineArrowRightAlt className="group-hover:translate-x-1 transition-transform" />
@@ -301,9 +305,7 @@ const ResponsiveNavbar = () => {
                   {item.icon}
                   <div>
                     <h4 className="text-white font-medium">{item.title}</h4>
-                    <p className="text-white/80 text-sm">
-                      Lorem ipsum dolor sit amet.
-                    </p>
+                    <p className="text-white/80 text-sm">{item.description}</p>
                   </div>
                 </Link>
               ))}

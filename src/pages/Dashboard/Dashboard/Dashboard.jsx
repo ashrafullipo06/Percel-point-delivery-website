@@ -9,12 +9,15 @@ import useUserRole from "../../../hooks/useUserRole";
 
 const Dashboard = () => {
   const { userRole } = useUserRole();
+  const navClass =
+    "flex items-center gap-3 p-3 rounded-md hover:bg-blue-100 transition duration-200 text-white/80 hover:text-gray-700";
+  const navText = "font-semibold ";
 
   return (
-    <div className="md:h-screen bg-base-200 flex flex-col">
+    <div className="md:h-screen bg-slate-900 flex flex-col">
       <Link
         to="/dashboard"
-        className="text-3xl font-bold text-center pt-8 text-gray-800"
+        className="text-3xl font-bold text-center pt-8 text-white"
       >
         Dashboard
       </Link>
@@ -26,36 +29,25 @@ const Dashboard = () => {
         {userRole === "admin" && (
           <>
             <li>
-              <NavLink
-                to="all-percels"
-                className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
-              >
+              <NavLink to="all-percels" className={navClass}>
                 <img className="w-8 h-8" src={percel} alt="All Percel Icon" />
-                <span className="font-semibold text-gray-700">All Percel</span>
+                <span className={navText}>All Percel</span>
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="users"
-                className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
-              >
+              <NavLink to="users" className={navClass}>
                 <img className="w-8 h-8" src={userimg} alt="Users Icon" />
-                <span className="font-semibold text-gray-700">All Users</span>
+                <span className={navText}>All Users</span>
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="all-delivery-men"
-                className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
-              >
+              <NavLink to="all-delivery-men" className={navClass}>
                 <img
                   className="w-8 h-8"
                   src={deleveryMen}
                   alt="Delivery Men Icon"
                 />
-                <span className="font-semibold text-gray-700">
-                  All Delivery Men
-                </span>
+                <span className={navText}>All Delivery Men</span>
               </NavLink>
             </li>
           </>
@@ -64,40 +56,29 @@ const Dashboard = () => {
         {userRole === "user" && (
           <>
             <li>
-              <NavLink
-                to="book-percel"
-                className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
-              >
+              <NavLink to="book-percel" className={navClass}>
                 <img
                   className="w-8 h-8"
                   src={percel}
                   alt="Book a Parcel Icon"
                 />
-                <span className="font-semibold text-gray-700">
-                  Book A Parcel
-                </span>
+                <span className={navText}>Book A Parcel</span>
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="my-percel"
-                className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
-              >
+              <NavLink to="my-percel" className={navClass}>
                 <img
                   className="w-8 h-8"
                   src={bookedPercel}
                   alt="My Parcel Icon"
                 />
-                <span className="font-semibold text-gray-700">My Parcel</span>
+                <span className={navText}>My Parcel</span>
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="my-profile"
-                className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
-              >
+              <NavLink to="my-profile" className={navClass}>
                 <img className="w-8 h-8" src={percel} alt="Profile Icon" />
-                <span className="font-semibold text-gray-700">Profile</span>
+                <span className={navText}>Profile</span>
               </NavLink>
             </li>
           </>
@@ -106,46 +87,33 @@ const Dashboard = () => {
         {userRole === "deliveryMan" && (
           <>
             <li>
-              <NavLink
-                to="my-delivery-list"
-                className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
-              >
+              <NavLink to="my-delivery-list" className={navClass}>
                 <img
                   className="w-8 h-8"
                   src={bookedPercel}
                   alt="Delivery List Icon"
                 />
-                <span className="font-semibold text-gray-700">
-                  My Delivery List
-                </span>
+                <span className={navText}>My Delivery List</span>
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="my-reviews"
-                className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
-              >
+              <NavLink to="my-reviews" className={navClass}>
                 <img
                   className="w-8 h-8"
                   src={bookedPercel}
                   alt="Reviews Icon"
                 />
-                <span className="font-semibold text-gray-700">My Reviews</span>
+                <span className={navText}>My Reviews</span>
               </NavLink>
             </li>
             <li>
-              <NavLink
-                to="delivery-history"
-                className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
-              >
+              <NavLink to="delivery-history" className={navClass}>
                 <img
                   className="w-8 h-8"
                   src={bookedPercel}
                   alt="Delivery History Icon"
                 />
-                <span className="font-semibold text-gray-700">
-                  Delivery History
-                </span>
+                <span className={navText}>Delivery History</span>
               </NavLink>
             </li>
           </>
@@ -155,12 +123,9 @@ const Dashboard = () => {
 
         {/* Shared Section */}
         <li>
-          <NavLink
-            to="/"
-            className="flex items-center gap-3 p-3 bg-white shadow-md rounded-md hover:bg-blue-100 transition duration-200"
-          >
+          <NavLink to="/" className={navClass}>
             <img className="w-8 h-8" src={home} alt="Home Icon" />
-            <span className="font-semibold text-gray-700">Home</span>
+            <span className={navText}>Home</span>
           </NavLink>
         </li>
       </ul>
