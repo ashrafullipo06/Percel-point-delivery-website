@@ -1,15 +1,11 @@
-import React from "react";
+import safety_a from "../../assets/features/safety_a.jpg";
+import safety_b from "../../assets/features/safety_b.jpg";
+import safety_c from "../../assets/features/safety_c.jpg";
+import safety_d from "../../assets/features/safety_d.jpg";
+import safety_e from "../../assets/features/safety_e.jpg";
+import safety_f from "../../assets/features/safety_f.jpg";
 
-// Example image imports
-// Replace these URLs with your own uploaded images or imported images
-const images = [
-  "/src/assets/features/safety_a.jpg",
-  "/src/assets/features/safety_b.jpg",
-  "/src/assets/features/safety_c.jpg",
-  "/src/assets/features/safety_d.jpg",
-  "/src/assets/features/safety_e.jpg",
-  "/src/assets/features/safety_f.jpg",
-];
+const images = [safety_a, safety_b, safety_c, safety_d, safety_e, safety_f];
 
 const FeaturesGallery = () => {
   return (
