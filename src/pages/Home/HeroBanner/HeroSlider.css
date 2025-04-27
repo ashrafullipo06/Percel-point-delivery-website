@@ -1,0 +1,13 @@
+/* Base style: hide on small devices */
+.swiper-button-prev,
+.swiper-button-next {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: flex;
+    color: red;
+  }
+}
