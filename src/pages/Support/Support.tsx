@@ -1,7 +1,12 @@
 import React from "react";
+import ContactForm from "./ContactUs";
 
 const Support = () => {
-  return <div>Hi</div>;
+  return (
+    <div>
+      <ContactForm />
+    </div>
+  );
 };
 
 export default Support;
